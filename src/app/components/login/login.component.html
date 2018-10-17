@@ -5,14 +5,47 @@
             <div class="card fat">
               <div class="card-body">
                 <h4 class="card-title">Ingresar</h4>
-                <form method="POST">
-                  <div class="form-group">
-                    <label for="email">Correo Electronico</label>
-                    <input id="email" type="email" class="form-control" name="email" value="" placeholder="e-mail" required autofocus>
-                  </div>
+                <form novalidate 
+                      (ngSubmit)="login(loginForm)" 
+                      #loginForm="ngForm" 
+                      autocomplete="off">
+                  <fieldset>
+                    <div class="form-group">
+                      <label for="email">Correo Electronico</label>
+                      <input id="email" 
+                          type="email" 
+                          class="form-control" 
+                          name="email" 
+                          placeholder="e-mail" 
+                          required 
+                          ngModel 
+                          name="userName" 
+                          #userNameVar="ngModel" 
+                          [ngClass]="{'is-valid': (userNameVar.touched || userNameVar.dirty) && !userNameVar.valid }" 
+                          autofocus>
+                      <span class="invalid-feedback">
+                        <span *ngIf="userNameVar.errors?.required">
+                          Correo requerido.
+                        </span>
+                      </span>
+                    </div>
                   <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="contraseña" required data-eye>
+                    <input id="password"
+                           type="password" 
+                           class="form-control" 
+                           name="password" 
+                           placeholder="contraseña"
+                           required
+                           ngModel
+                           #passwordVar="ngModel"
+                           [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"
+                           data-eye>
+                    <span class="invalid-feedback">
+                      <span *ngIf="passwordVar.errors?.required">
+                        Contraseña requerida
+                      </span>
+                    </span>
                   </div>
                   <div class="form-group">
                     <label>
@@ -20,11 +53,15 @@
                     </label>
                   </div>
                   <div class="form-group no-margin">
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" 
+                            class="btn btn-primary btn-block"
+                            [disabled]="!loginForm.valid">
                       Ingresar
                     </button>
                   </div>
-                  <div class="margin-top20 text-center">¿Aun no tienes una cuenta? <a href=#>Crea una</a></div>
+                  </fieldset>
+                  
+                  <div class="margin-top20 text-center">¿Aun no tienes una cuenta? <a [routerLink]="['/register']">Crea una</a></div>
                 </form>
               </div>
             </div>
