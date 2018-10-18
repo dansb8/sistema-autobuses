@@ -1,35 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-
-export interface Cat {
-  name: string;
-}
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-  getAllCats(): Observable<Cat[]> {
-    return this.http.get<Cat[]>('http://localhost:8000/api/cats');
+  getAllCats(): Observable<User[]> {
+    return this._http.get<User[]>('http://localhost:8000/api/cats');
   }
 
-  getCat(name: string): Observable<Cat> {
-    return this.http.get<Cat>('http://localhost:8000/api/cats/' + name);
+  getCat(id: number): Observable<User> {
+    return this._http.get<User>('http://localhost:8000/api/cats/' + id);
   }
 
-  insertCat(cat: Cat): Observable<Cat> {
-    return this.http.post<Cat>('http://localhost:8000/api/cats/', cat);
+  insertCat(user: User): Observable<User> {
+    return this._http.post<User>('http://localhost:8000/api/cats/', user);
   }
 
-  updateCat(cat: Cat): Observable<void> {
-    return this.http.put<void>('http://localhost:8000/api/cats/' + cat.name, cat);
+  updateCat(user: User): Observable<void> {
+    return this._http.put<void>('http://localhost:8000/api/cats/' + user.name, user);
   }
 
   deleteCat(name: string) {
-    return this.http.delete('http://localhost:8000/api/cats/' + name);
+    return this._http.delete('http://localhost:8000/api/cats/' + name);
   }
 }

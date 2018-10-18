@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//componentes
+// componentes
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -21,7 +21,10 @@ import { TerminalComponent } from './components/admin/terminal/terminal.componen
 import { RoutesComponent } from './components/admin/routes/routes.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { TicketsComponent } from './components/admin/tickets/tickets.component';
-//rutas
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+
+// rutas
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,8 +50,9 @@ import { TicketsComponent } from './components/admin/tickets/tickets.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
