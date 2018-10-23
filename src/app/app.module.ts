@@ -21,6 +21,8 @@ import { TerminalComponent } from './components/admin/terminal/terminal.componen
 import { RoutesComponent } from './components/admin/routes/routes.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { TicketsComponent } from './components/admin/tickets/tickets.component';
+import { ShellComponent } from './shell/shell.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //rutas
 @NgModule({
   declarations: [
@@ -42,11 +44,14 @@ import { TicketsComponent } from './components/admin/tickets/tickets.component';
     TerminalComponent,
     RoutesComponent,
     UsersComponent,
-    TicketsComponent
+    TicketsComponent,
+    ShellComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
