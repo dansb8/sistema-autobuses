@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { TicketModule } from './components/user/ticket/ticket.module';
 //componentes
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
@@ -7,7 +8,6 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
-import { TicketComponent } from './components/user/ticket/ticket.component';
 import { ReportComponent } from './components/user/report/report.component';
 import { PersonalComponent } from './components/user/personal/personal.component';
 import { CreditComponent } from './components/user/credit/credit.component';
@@ -23,6 +23,9 @@ import { UsersComponent } from './components/admin/users/users.component';
 import { TicketsComponent } from './components/admin/tickets/tickets.component';
 import { ShellComponent } from './shell/shell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TicketComponent } from './components/user/ticket/ticket.component';
+import { SearchTicketComponent } from './components/user/ticket/search-ticket/search-ticket.component';
+
 //rutas
 @NgModule({
   declarations: [
@@ -31,7 +34,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     HomeComponent,
     UserComponent,
-    TicketComponent,
     ReportComponent,
     PersonalComponent,
     CreditComponent,
@@ -45,13 +47,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RoutesComponent,
     UsersComponent,
     TicketsComponent,
-    ShellComponent
+    ShellComponent,
+    TicketComponent,
+    SearchTicketComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    //TicketModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

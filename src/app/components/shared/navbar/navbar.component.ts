@@ -11,7 +11,9 @@ export class NavbarComponent implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
-
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
   get userName(): string | null {
     if (this.authService.currentUser) {
       return this.authService.currentUser.userName;

@@ -2,6 +2,9 @@
   <div class="row">
     <nav class="col-md-2 bg-light sidebar">
       <div class="sidebar-sticky">
+          <h6 class="sidebar-heading justify-content-between align-items-center px-3 mt-4 mb-1 text-muted d-none d-lg-block">
+              <span>Pasajero</span>
+            </h6>
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link active" [routerLink]="['ticket']"><i class="fa fa-list-alt d-lg-none"></i><a class="d-none d-lg-block">Comprar Boletos</a><span class="sr-only">(current)</span></a>
@@ -24,7 +27,7 @@
       </div>
     </nav>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div class="">
         <router-outlet></router-outlet>
       </div>
     </main>

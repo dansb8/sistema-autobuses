@@ -14,7 +14,9 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.currentUser;
   }
-
+  isAdmin(): boolean {
+      return this.currentUser.isAdmin;
+  }
   login(userName: string, password: string): void {
     // Code here would log into a back end service
     // and return user information
@@ -25,7 +27,6 @@ export class AuthService {
       isAdmin: false
     };
   }
-
   logout(): void {
     this.currentUser = null;
   }
