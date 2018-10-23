@@ -1,16 +1,64 @@
-<div class="form-row">
-    <div class="form-group col-md-4 ">
-        <label for="origen">Origen</label>
-        <select id="origen" class="form-control selectpicker" data-live-search="true">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="origen">Origen</label>
-        <select id="origen" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-    </div>
-</div>
+<div class="progress" style="height: 30px">
+        <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
+      </div>
+<form   novalidate
+        (ngSubmit)="search(searchform)"
+        #searchform="ngForm">
+        <fieldset>
+            <div class="form-goup">
+                    <div class="form-row">
+                            <div class="form-group col-md-4 ">
+                                <label for="origen">Origen</label>
+                                <select id="origen"
+                                        class="form-control"
+                                        required
+                                        ngModel
+                                        name="origen"
+                                        #origenvar="ngModel">
+                                  <option selected>Choose...</option>
+                                  <option>...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="destino">Destino</label>
+                                <select id="destino"
+                                        class="form-control disabled"
+                                        required
+                                        ngModel
+                                        name="destino"
+                                        #destinovar="ngModel"
+                                        >
+                                  <option selected>Choose...</option>
+                                  <option>...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                                <div class="col-xs-12 col-12 col-md-4 form-group">
+                                    <label for="fecha">Fecha</label>  
+                                    <input type="text"
+                                        placeholder="Escoge una fecha"
+                                        class="form-control"
+                                        bsDatepicker
+                                        [minDate]="minDate"
+                                        [maxDate]="maxDate"
+                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                                        required
+                                        ngModel
+                                        name="fecha"
+                                        autocomplete="off"
+                                    >
+                                </div>
+                        </div>
+                        <div class="form-row justify-content-around">
+                                <button type="submit" 
+                                        class="btn btn-success"
+                                        [disabled]="!searchform.valid"
+                                >
+                                  Aceptar
+                                </button>
+                        </div>
+            </div>
+        </fieldset>
+        
+</form>

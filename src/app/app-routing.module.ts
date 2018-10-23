@@ -16,6 +16,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { BusComponent } from './components/admin/bus/bus.component';
 import { TicketComponent } from './components/user/ticket/ticket.component';
 import { SearchTicketComponent } from './components/user/ticket/search-ticket/search-ticket.component';
+import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component';
+import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 const routes: Routes = [
   {path: '', component: ShellComponent,children:[  
   { path: 'home', component: HomeComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
     children: [
       { path: 'ticket', component: TicketComponent, children:[
         {path: 'search', component: SearchTicketComponent},
+        {path: 'select', component: SelectTicketComponent},
+        {path: 'pay' , component: PayTicketComponent},
         {path: '', redirectTo: 'search', pathMatch: 'full'}
       ]},
       { path: 'personal' , component: PersonalComponent},

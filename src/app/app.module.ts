@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { TicketModule } from './components/user/ticket/ticket.module';
 //componentes
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
@@ -25,7 +24,9 @@ import { ShellComponent } from './shell/shell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketComponent } from './components/user/ticket/ticket.component';
 import { SearchTicketComponent } from './components/user/ticket/search-ticket/search-ticket.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component'
+import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 //rutas
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import { SearchTicketComponent } from './components/user/ticket/search-ticket/se
     ShellComponent,
     TicketComponent,
     SearchTicketComponent,
+    SelectTicketComponent,
+    PayTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { SearchTicketComponent } from './components/user/ticket/search-ticket/se
     ReactiveFormsModule,
     //TicketModule,
     AppRoutingModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
