@@ -30,8 +30,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-
 ul.social-network {
 	list-style: none;
 	display: inline;
@@ -96,6 +94,7 @@ ul.social-network li {
 	-o-transition: all 0.2s;
 	-ms-transition: all 0.2s;
 	transition: all 0.2s;
+	
 }
 .social-circle i {
 	color: #fff;
@@ -107,5 +106,5 @@ ul.social-network li {
 }
 
 a {
- background-color: #D3D3D3;   
+ background-color: rgb(126, 126, 126);   
 }

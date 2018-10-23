@@ -1,22 +1,17 @@
-<body>
-  <h5 class="text-center">Tarjetas dadas de alta del usuario {{card["user"]}} </h5>
-  <div class="container principalContainer">
-    <div class="col cards" *ngFor="let card of cards">
+<div class="card-columns">
+  <div class="card border-dark" style="width:300px" *ngFor="let card of cards">
+  <img class="card-img-top" src="/src/images/img_avatar3.png" alt="Card image">
+    <div class="card-body text-dark row">
+      <h4 class="card-title col-sm-12"> {{card["user"]}} </h4>
+      <h5 class="card-subtitle mb-2 text-muted col-sm-12"> {{card["company"]}} </h5>
+      <h6 class="card-text col-sm-12">{{card["numbers"]}} </h6>
+      <h6 class="card-text col-sm-6 text-muted">Nip</h6>
+      <h6 class="card-text col-sm-6 text-muted text-center">Valida hasta</h6>
+      <p class="card-text col-sm-6">{{card["nip"]}} </p>
+      <p class="card-text col-sm-6 text-center">{{card["expiration"]}} </p>
       <div class="col-sm-12">
-        <div class="card-header">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Propietario {{card["user"]}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted"> Tarjeta {{card["company"]}} </h6>
-              <p class="card-text"> Numeros de la tarjeta: {{card["numbers"]}} </p>
-              <div class="row">
-               <p class="card-text col-sm-6 text-left">Nip: {{card["nip"]}} </p>
-               <p class="card-text col-sm-6 text-rigth">Fecha de vencimiento: {{card["expiration"]}} </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <a href="#" class="btn btn-dark ">Ver perfil</a>
       </div>
     </div>
-  </div>
-</body>
+  </div> 
+</div>
