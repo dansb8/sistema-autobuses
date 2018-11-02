@@ -7,12 +7,24 @@ import { Router} from '@angular/router'
   styleUrls: ['./select-ticket.component.css']
 })
 export class SelectTicketComponent implements OnInit {
-
+  public passengers:[
+    "",
+    "",
+    "",
+    "",
+    ""
+  ];
+  public numpass;
   constructor(private router: Router) { }
-  select(selectdform: NgForm): void{
+  selectNum(numboletos): void{
+    this.numpass=numboletos;
+  }
+  selectVal(selectform: NgForm): void{
+    console.log(this.numpass);
     this.router.navigate(['/user/ticket/pay']);
   }
   ngOnInit() {
+    
   }
 
 }

@@ -5,10 +5,10 @@
             <div class="card fat">
               <div class="card-body">
                 <h4 class="card-title">Ingresar</h4>
-                <form novalidate 
+                <form  
                       (ngSubmit)="login(loginForm)" 
                       #loginForm="ngForm" 
-                      autocomplete="off">
+                      autocomplete="on">
                   <fieldset>
                     <div class="form-group">
                       <label for="email">Correo Electronico</label>
@@ -21,7 +21,7 @@
                           ngModel 
                           name="userName" 
                           #userNameVar="ngModel" 
-                          [ngClass]="{'is-valid': (userNameVar.touched || userNameVar.dirty) && !userNameVar.valid }" 
+                         
                           autofocus>
                       <span class="invalid-feedback">
                         <span *ngIf="userNameVar.errors?.required">

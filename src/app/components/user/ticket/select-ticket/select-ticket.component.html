@@ -1,8 +1,8 @@
 <div class="progress" style="height: 30px">
     <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="Seleccion" aria-valuemin="0" aria-valuemax="100">Selección</div>
   </div>
-<form   novalidate
-    (ngSubmit)="select(selectform)"
+<form
+    (ngSubmit)="selectVal(selectform)"
     #searchform="ngForm">
     <fieldset>
         <div class="form-group">
@@ -14,23 +14,26 @@
                           required
                           ngModel
                           name="numboletos"
-                          #destinovar="ngModel">
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                          #destinovar="ngModel"
+                          >
+                    <option value=1 selected>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
                   </select>
+                  <div class="form-row " *ngIf="true">
+                      <input  type="text"
+                              class="form-control"
+                              id="nombre" 
+                              placeholder="Nombre pasajero"
+                              ngModel
+                              name="nombre1"
+                              #nombrevar="ngModel" 
+                              required>
+              </div>
             </div>
-            <div class="form-row" *ngFor="let x of passengers">
-                <div class="form-group col-lg-6">
-                    <input  type="text"
-                            class="form-control"
-                            id="nombre" 
-                            placeholder="Telefono" 
-                            required>
-                </div>
-            </div>
+            
           </div>
           <div class="form-row justify-content-around">
               <button type="submit" 

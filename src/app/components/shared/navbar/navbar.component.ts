@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../login/auth.service';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
     return this.authService.isAdmin();
   }
   get userName(): string | null {
-    if (this.authService.currentUser) {
+    if (this.authService.isLoggedIn) {
       return this.authService.currentUser.userName;
     } else {
       return null;
