@@ -27,6 +27,7 @@ import { SearchTicketComponent } from './components/user/ticket/search-ticket/se
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component'
 import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
+import { HttpClientModule } from '@angular/common/http';
 //rutas
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-tick
     ReactiveFormsModule,
     //TicketModule,
     AppRoutingModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

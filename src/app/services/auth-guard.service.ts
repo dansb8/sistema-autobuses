@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
         return true;
     }
     // Retain the attempted URL for redirection
-    this.authService.redirectUrl = url;
+    //this.authService.redirectUrl = url;
     this.router.navigate(['/login']);
     return false;
   }
@@ -46,7 +46,7 @@ export class AdminGuard implements CanActivate,CanActivateChild{
             return true;
         }
         // Retain the attempted URL for redirection
-        this.authService.redirectUrl = url;
+        //this.authService.redirectUrl = url;
         this.router.navigate(['/login']);
         return false;
       }

@@ -10,7 +10,7 @@ import {PersonalComponent} from './components/user/personal/personal.component'
 import {ReportComponent} from './components/user/report/report.component'
 import {CreditComponent} from './components/user/credit/credit.component'
 import { LoginComponent } from './components/login/login.component';
-import { AuthGuard,AdminGuard} from './components/login/auth-guard.service';
+import { AuthGuard,AdminGuard} from './services/auth-guard.service';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { BusComponent } from './components/admin/bus/bus.component';
