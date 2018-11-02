@@ -21,7 +21,7 @@ export class RegisterService {
       'password': `${user.password}`,
       'rfc': `${user.rfc}`
     });
-    this._http.post<Boolean>('http://192.168.0.25:8000/api/user/register/',null,{headers}).subscribe((result: Boolean)=>{
+    this._http.post<Boolean>('http://192.168.10.153:8000/api/user/register/',null,{headers}).subscribe((result: Boolean)=>{
         console.log(result);
         if(result){
           this.router.navigate(['/home']);

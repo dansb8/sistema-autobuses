@@ -1,16 +1,15 @@
 <div class="card-columns">
   <div class="card border-dark" style="width:300px" *ngFor="let card of cards">
-  <img class="card-img-top" src="/src/images/img_avatar3.png" alt="Card image">
+  <img class="card-img-top" src="/src/images/mastercard.jpg" *ngIf="card['company']=='MasterCard'" alt="Card image">
+  <img class="card-img-top" src="/src/images/visa.png" *ngIf="card['company']=='Visa'" alt="Card image">
     <div class="card-body text-dark row">
-      <h4 class="card-title col-sm-12"> {{card["user"]}} </h4>
-      <h5 class="card-subtitle mb-2 text-muted col-sm-12"> {{card["company"]}} </h5>
-      <h6 class="card-text col-sm-12">{{card["numbers"]}} </h6>
-      <h6 class="card-text col-sm-6 text-muted">Nip</h6>
+      <h4 class="card-title col-sm-12"> {{card["owner"]}} </h4>
+      <h6 class="card-text col-sm-12">{{card["number"]}} </h6>
       <h6 class="card-text col-sm-6 text-muted text-center">Valida hasta</h6>
-      <p class="card-text col-sm-6">{{card["nip"]}} </p>
-      <p class="card-text col-sm-6 text-center">{{card["expiration"]}} </p>
+      <p class="card-text col-sm-6 text-center">{{card["date"]}} </p>
       <div class="col-sm-12">
-        <a href="#" class="btn btn-dark ">Ver perfil</a>
+        <a href="#" class="btn btn-dark ">Editar tarjeta</a>
+        <button class="btn btn-dark " (click)="delete(card['id'])">Eliminar tarjeta</button>
       </div>
     </div>
   </div> 

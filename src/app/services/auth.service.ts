@@ -69,6 +69,6 @@ export class AuthService {
       'email': `${email}`,
       'password': `${password}`
     });
-    return this._http.post<User>('http://192.168.0.25:8000/api/login/',null,{headers});
+    return this._http.post<User>('http://192.168.10.153:8000/api/login/',null,{headers});
   }
 }
