@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//componentes
+// componentes
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -25,10 +25,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketComponent } from './components/user/ticket/ticket.component';
 import { SearchTicketComponent } from './components/user/ticket/search-ticket/search-ticket.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
-import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component'
+import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component';
 import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 import { HttpClientModule } from '@angular/common/http';
-//rutas
+import { PersonaldataComponent } from './components/admin/personaldata/personaldata.component';
+// rutas
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,13 +54,14 @@ import { HttpClientModule } from '@angular/common/http';
     TicketComponent,
     SearchTicketComponent,
     SelectTicketComponent,
-    PayTicketComponent
+    PayTicketComponent,
+    PersonaldataComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    //TicketModule,
+    // TicketModule,
     AppRoutingModule,
     BsDatepickerModule.forRoot(),
     HttpClientModule
