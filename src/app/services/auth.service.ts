@@ -10,7 +10,7 @@ import { Router} from '@angular/router'
 export class AuthService {
   currentUser: User | null;
   loggedin: boolean;
-  prueba: boolean=true;
+  prueba: boolean=false;
   constructor(private _http:HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
@@ -37,10 +37,10 @@ export class AuthService {
     }
     else{
     this.validation(userName,password).subscribe((user: User )=>{
-      //this.currentUser=user;
-      this.currentUser.id=user.id;
-      this.currentUser.userName=user.userName;
-      this.currentUser.isAdmin=user.isAdmin;
+      this.currentUser=user;
+      //this.currentUser.id=user.id;
+      //this.currentUser.userName=user.userName;
+      //this.currentUser.isAdmin=user.isAdmin;
       if( user.id!=null){
         console.log(this.currentUser);
         if (this.isAdmin()){
