@@ -1,0 +1,86 @@
+<form class="jumbotron" style="margin-top:5%;" 
+    (ngSubmit)="data(dataForm)"
+    #dataForm="ngForm"
+    autocomplete="on">
+    <h1 class="display-4">Hola, Admin!</h1>
+    <p class="lead">Informacion Personal</p>
+    <hr class="my-4">
+    <p class="lead">205194</p>
+    <hr class="my-4">
+    <p class="lead">Nombre completo</p>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+          <input 
+            type="text" 
+            class="form-control font-italic" 
+            ngModel
+            name="adminName"
+            #userNameVar="ngModel"
+            [disabled]="this.flag" 
+            [placeholder]="this.name">
+        </div>
+        <div class="form-group col-md-3">
+            <input type="text" class="form-control font-italic" id="" [disabled]="this.flag" [placeholder]="this.last_name1">
+          </div>
+        <div class="form-group col-md-3">
+              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag" [placeholder]="this.last_name2">
+        </div>
+        <div class="form-group col-md-2">
+            <button type="button" class="btn btn-outline-dark" (click)="this.flag = !this.flag">Editar</button>
+        </div>
+    </div>
+    <hr class="my-4">
+    <p class="lead">Rfc y Correo Electronico</p>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <input type="text" class="form-control font-italic" id="" [disabled]="this.flag2" [placeholder]="this.rfc">
+          </div>
+          <div class="form-group col-md-2">
+              <button type="button" class="btn btn-outline-dark" (click)="this.flag2 = !this.flag2">Editar</button>
+          </div>
+          <div class="form-group col-md-4">
+              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag3" [placeholder]="this.email">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-outline-dark" (click)="this.flag3 = !this.flag3" >Editar</button>
+            </div>
+      </div>
+      <hr class="my-4">
+      <p class="lead">Telefono</p>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag4" [placeholder]="this.cel">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-outline-dark" (click)="this.flag4 = !this.flag4">Editar</button>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="form-row">
+            <button type="button" class="btn btn-outline-dark col-md-4" (click)="this.changepass = this.changepass + 1">Cambiar Contraseña</button>
+        </div>
+        <div *ngIf="changepass % 2 == 0">
+            <p class="lead"></p>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="text" class="form-control font-italic" id=""  placeholder="Contraseña Actual">
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="text" class="form-control font-italic" id="" placeholder="Nueva Contraseña">
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="text" class="form-control font-italic" id="" placeholder="Verificar Contraseña">
+                </div>
+          </div>
+        </div>
+        <hr class="my-4">
+            <button 
+                type="submit"  
+                class="btn btn-outline-dark col-md-4">
+                Guardar Cambios
+            </button>
+</form>
