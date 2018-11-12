@@ -10,7 +10,7 @@ import { Router} from '@angular/router'
 export class AuthService {
   currentUser: User | null;
   loggedin: boolean;
-  prueba: boolean=false;
+  prueba: boolean=true;
   constructor(private _http:HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
@@ -24,7 +24,7 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: true
+        isAdmin: false
       };
       if (this.isAdmin()){
         console.log(this.isAdmin());

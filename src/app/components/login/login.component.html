@@ -1,9 +1,10 @@
-<body class="my-login-page" style="background-color: #F8F9F9;">
+<body class="my-login-page">
       <div class="container h-100">
         <div class="row justify-content-md-center h-100">
-          <div class="card-wrapper" style="width: 400px; margin-top: 10%; margin-bottom: 10%;">
-            <div class="card fat">
+          <div style="width: 400px; margin-top:10%; " >
+            <div class="card fat" style="background: rgba(39, 39, 44, 0.705);color:#fff;">
               <div class="card-body">
+                <img src="/src/images/user.png" class="user">
                 <h4 class="card-title">Ingresar</h4>
                 <form  
                       (ngSubmit)="login(loginForm)" 
@@ -34,7 +35,7 @@
                            type="password" 
                            class="form-control" 
                            name="password" 
-                           placeholder="contraseña"
+                           placeholder="Contraseña"
                            required
                            ngModel
                            #passwordVar="ngModel"
@@ -45,11 +46,6 @@
                         Contraseña requerida
                       </span>
                     </span>
-                  </div>
-                  <div class="form-group">
-                    <label>
-                      <input type="checkbox" name="remember"> Recuerdame
-                    </label>
                   </div>
                   <div class="form-group no-margin">
                     <button type="submit" 

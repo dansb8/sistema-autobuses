@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-import { NgForm} from '@angular/forms'
+import { Router } from '@angular/router';
+import { NgForm} from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
-import { User } from '../../interfaces/user'
+import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
