@@ -9,16 +9,10 @@ import { User} from '../login/user'
 export class HomeComponent implements OnInit {
 
   loading: Boolean =true;
-  user: User;
-  constructor(private _userService: UserService) { }
+ 
+  constructor() { }
 
   ngOnInit() {
-    this._userService.getUser(1).subscribe( (user: User)=>{
-      this.user=user;
-      console.log(user.userName);
-      this.loading=false;
-    }
-    )
   }
 
 }

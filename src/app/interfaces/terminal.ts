@@ -1,4 +1,4 @@
-export interface Terminales {
+export interface Terminal {
     id: number,
     city: string,
     name: string,

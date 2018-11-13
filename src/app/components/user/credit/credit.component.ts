@@ -17,11 +17,41 @@ export class CreditComponent implements OnInit {
   constructor(private userservice: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.id = this.authService.currentUser.id;
-    this.userservice.showcards(this.id).subscribe((cards: Card[]) => {
-      this.cards = cards;
-      console.log(cards);
-    });
+    if( this.authService.prueba){
+      this.cards=[
+        {id: 1,
+        type: "debito",
+        company: "Visa",
+        number: "1234567891233",
+        owner: this.authService.currentUser.userName,
+        date: "10/21"
+        },
+        {
+          id: 2,
+          type: "debito",
+          company: "MasterCard",
+          number: "1234567891233",
+          owner: this.authService.currentUser.userName,
+          date: "10/21"
+        },
+        {
+          id: 3,
+          type: "debito",
+          company: "Visa",
+          number: "1234567891233",
+          owner: this.authService.currentUser.userName,
+          date: "10/21"
+        }
+      ]
+    }
+    else{
+      this.id=this.authService.currentUser.id;
+      this.userservice.showcards(this.id).subscribe((cards: Card[])=>{
+        this.cards=cards;
+        console.log(cards);
+      });
+    }
+    
   }
   showEdit() {
     this.counter++;
