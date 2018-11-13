@@ -46,8 +46,8 @@ const routes: Routes = [
     children: [
       {path: 'bus', component: BusComponent},
       {path: 'tickets' , component: TicketsComponent},
-      {path: 'data' , component: PersonaldataComponent},
-      {path: '' , redirectTo: 'data', pathMatch: 'full'}
+      {path: 'personal' , component: PersonaldataComponent},
+      {path: '' , redirectTo: 'personal', pathMatch: 'full'}
     ]
   }
   ]

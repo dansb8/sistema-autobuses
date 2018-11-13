@@ -55,7 +55,7 @@ import { PersonaldataComponent } from './components/admin/personaldata/personald
     SearchTicketComponent,
     SelectTicketComponent,
     PayTicketComponent,
-    PersonaldataComponent
+    PersonaldataComponent,
   ],
   imports: [
     BrowserModule,
