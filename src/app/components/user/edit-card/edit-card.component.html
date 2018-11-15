@@ -1,0 +1,94 @@
+<form class="jumbotron" style="margin-top:5%;">
+  <h1 class="display-4">Daniel Fermin Romo Lopez</h1>
+  <p class="lead">Editar tarjeta</p>
+  <hr class="my-4">
+  <p class="lead">ID: 221903</p>
+  <hr class="my-4">
+  <p class="lead">Propietario</p>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input 
+        type="text" 
+        class="form-control-plaintext" 
+        [disabled]="this.flag">
+    </div>
+    <div class="form-group col-md-3">
+      <input 
+        type="text" 
+        class="form-control-plaintext"
+        [disabled]="this.flag">
+    </div>
+    <div class="form-group col-md-3">
+      <input 
+        type="text" 
+        class="form-control-plaintext"
+        [disabled]="this.flag">
+    </div>
+    <div class="form-group col-md-2">
+      <button type="button" class="btn btn-outline-dark" (click)="this.flag = !this.flag">Editar</button>
+    </div>
+  </div>
+  <hr class="my-4">
+  <p class="lead">Numero de la tarjeta</p>
+  <div class="form-row">
+    <div class="form-group col-md-1">
+      <input 
+        type="text"
+        maxlength="4"
+        name="numbers1"
+        class="form-control" 
+        [disabled]="this.flag2">
+    </div>
+    <div class="form-group col-md-1">
+      <input 
+        type="text"
+        maxlength="4" 
+        class="form-control" 
+        [disabled]="this.flag2">
+    </div>
+    <div class="form-group col-md-1">
+      <input 
+        type="text"
+        maxlength="4" 
+        class="form-control" 
+        [disabled]="this.flag2">
+    </div>
+    <div class="form-group col-md-1">
+      <input 
+        type="text" 
+        maxlength="4"
+        class="form-control" 
+        [disabled]="this.flag2">
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-outline-dark" (click)="this.flag2 = !this.flag2" >Editar</button>
+    </div>
+  </div>
+  <hr class="my-4">
+  <p class="lead">Compañia</p>
+  <div class="form-row">
+    <select name="" class="form-control col-md-4">
+      <option value="">MasterCard</option>
+      <option value="">Visa</option>
+    </select>
+  </div>
+  <hr class="my-4">
+  <p class="lead">Fecha de expiracion</p>
+  <div class="form-row">
+    <div class="form-group col-md-1">
+      <input type="text" name="date1" class="form-control" [disabled]="this.flag3">
+    </div>
+    <div class="form-group col-md-1">
+      <input type="text" name="date2" class="form-control" [disabled]="this.flag3">
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-outline-dark" (click)="this.flag3 = !this.flag3" >Editar</button>
+    </div>
+  </div>
+  <hr class="my-4">
+  <button 
+    type="submit"  
+    class="btn btn-outline-dark col-md-4">
+      Guardar Cambios
+  </button>
+</form>
