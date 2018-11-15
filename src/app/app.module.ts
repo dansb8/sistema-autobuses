@@ -29,6 +29,7 @@ import { SelectTicketComponent } from './components/user/ticket/select-ticket/se
 import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonaldataComponent } from './components/admin/personaldata/personaldata.component';
+import { EditCardComponent } from './components/user/edit-card/edit-card.component';
 // rutas
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { PersonaldataComponent } from './components/admin/personaldata/personald
     SearchTicketComponent,
     SelectTicketComponent,
     PayTicketComponent,
-    PersonaldataComponent
+    PersonaldataComponent,
+    EditCardComponent
   ],
   imports: [
     BrowserModule,

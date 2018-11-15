@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
     return this.authService.isAdmin();
   }
   get userName(): string | null {
-    if (this.authService.isLoggedIn) {
+    if (this.authService.loggedin) {
       return this.authService.currentUser.userName;
     } else {
       return null;
@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit() {
+    console.log(this.authService.loggedin);
   }
 
   logOut(): void {

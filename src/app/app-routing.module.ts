@@ -20,12 +20,14 @@ import { SelectTicketComponent } from './components/user/ticket/select-ticket/se
 import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 import { TicketsComponent } from './components/admin/tickets/tickets.component';
 import { PersonaldataComponent } from './components/admin/personaldata/personaldata.component';
+import { EditCardComponent } from './components/user/edit-card/edit-card.component';
 const routes: Routes = [
   {path: '', component: ShellComponent, children: [
   { path: 'home', component: HomeComponent },
   { path: 'directory', component: DirectoryComponent},
   { path: 'search', component: SearchComponent},
   { path: 'register', component: RegisterComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   {
     path: 'user', canActivate: [AuthGuard], component: UserComponent,
     children: [
@@ -37,7 +39,9 @@ const routes: Routes = [
       ]},
       { path: 'personal' , component: PersonalComponent},
       { path: 'report' , component: ReportComponent},
-      { path: 'cards' , component: CreditComponent},
+      { path: 'cards' , component: CreditComponent, children: [
+        { path: 'editcards' , component: EditCardComponent},
+      ]},
       { path: '' , redirectTo: 'ticket', pathMatch: 'full'}
     ]
   },
@@ -46,8 +50,8 @@ const routes: Routes = [
     children: [
       {path: 'bus', component: BusComponent},
       {path: 'tickets' , component: TicketsComponent},
-      {path: 'data' , component: PersonaldataComponent},
-      {path: '' , redirectTo: 'data', pathMatch: 'full'}
+      {path: 'personal' , component: PersonaldataComponent},
+      {path: '' , redirectTo: 'personal', pathMatch: 'full'}
     ]
   }
   ]

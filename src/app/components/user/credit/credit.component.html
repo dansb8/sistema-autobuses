@@ -8,9 +8,11 @@
       <h6 class="card-text col-sm-6 text-muted text-center">Valida hasta</h6>
       <p class="card-text col-sm-6 text-center">{{card["date"]}} </p>
       <div class="col-sm-12">
-        <a href="#" class="btn btn-dark ">Editar tarjeta</a>
         <button class="btn btn-dark " (click)="delete(card['id'])">Eliminar tarjeta</button>
       </div>
     </div>
   </div> 
+    <button class="btn btn-dark" (click)="showEdit()">{{this.edit}}</button>
 </div>
+<app-edit-card *ngIf="this.counter % 2 !== 0"></app-edit-card>
+<router-outlet></router-outlet>

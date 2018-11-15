@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User} from '../components/login/user'
 import { Card } from '../interfaces/card'
+import { Apiback } from 'src/app/apiback'
 //export interface User {
   //name: string;
 //}
@@ -15,23 +16,23 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://192.168.0.25:8000/api/Users');
+    return this.http.get<User[]>(Apiback.ENDPOINT+'/api/Users');
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>('http://192.168.0.25:8000/api/cats/' + id);
+    return this.http.get<User>(Apiback.ENDPOINT+'/api/cats/' + id);
   }
 
   insertUser(User: User): Observable<User> {
-    return this.http.post<User>('http://192.168.0.25:8000/api/Users/', User);
+    return this.http.post<User>(Apiback.ENDPOINT+'/api/Users/', User);
   }
 
   updateUser(User: User): Observable<void> {
-    return this.http.put<void>('http://192.168.0.25:8000/api/Users/' + User.userName, User);
+    return this.http.put<void>(Apiback.ENDPOINT+'/api/Users/' + User.userName, User);
   }
 
   deleteUser(name: string) {
-    return this.http.delete('http://192.168.0.25:8000/api/Users/' + name);
+    return this.http.delete(Apiback.ENDPOINT+'/api/Users/' + name);
   }
 
   //tarjetas
@@ -39,13 +40,13 @@ export class UserService {
     const headers = new HttpHeaders({
       'id': `${id}`
     });
-    return this.http.post<Card[]>('http://192.168.10.153:8000/api/cards/request/',null,{headers});
+    return this.http.post<Card[]>(Apiback.ENDPOINT+'/api/cards/request/',null,{headers,withCredentials:true});
   }
   deletecard(id: number): Observable<Boolean>{
     const headers = new HttpHeaders({
       'id': `${id}`
     });
     console.log(id);
-    return this.http.post<Boolean>('http://192.168.10.153:8000/api/cards/delete/',null,{headers});
+    return this.http.post<Boolean>(Apiback.ENDPOINT+'/api/cards/delete/',null,{headers,withCredentials:true});
   }
 }

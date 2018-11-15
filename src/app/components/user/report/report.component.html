@@ -1,3 +1,79 @@
-<p>
-  report works!
-</p>
+  <div class="card" style="margin-top:5%;">
+      <div class="card-header text-center">
+          <h5>Detalles de compra #n</h5>
+        </div>
+        <div class="card-body">
+            <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Detalles del viaje
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <h6>Dia</h6>01/01/2018
+                      <hr class="my-4">
+                      <h6>Hora</h6>20:00
+                      <hr class="my-4">
+                      <h6>Origen</h6>Aguascalientes
+                      <hr class="my-4">
+                      <h6>Destino</h6>Zacatecas
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Detalles del pasajero
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <h6>Numero de asiento</h6>10
+                        <hr class="my-4">
+                        <h6>Pasajero</h6>Victor Manuel Vidales Hernandez
+                        <hr class="my-4">
+                        <h6>Monto</h6>$350
+                        <hr class="my-4">
+                        <h6>Descuento</h6>N/A
+                        <hr class="my-4">
+                        <h6>Tipo de boleto</h6>Normal
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Tarjeta de credito
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="card border-dark" style="width:300px">
+                            <img class="card-img-top" src="/src/images/mastercard.jpg" *ngIf="card['company']=='MasterCard'" alt="Card image">
+                            <img class="card-img-top" src="/src/images/visa.png" *ngIf="card['company']=='Visa'" alt="Card image">
+                              <div class="card-body text-dark row">
+                                <h4 class="card-title col-sm-12"> Propietario </h4>
+                                <h6 class="card-text col-sm-12">1234-1234-1234-1234</h6>
+                                <h6 class="card-text col-sm-6 text-muted text-center">Valida hasta</h6>
+                                <p class="card-text col-sm-6 text-center">01/23 </p>
+                                <div class="col-sm-12">
+                                  <button class="btn btn-dark">
+                                      Ver tarjetas
+                                  </button>
+                                </div>
+                              </div>
+                            </div> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+  </div>

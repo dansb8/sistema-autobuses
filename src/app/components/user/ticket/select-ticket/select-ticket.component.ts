@@ -24,7 +24,6 @@ export class SelectTicketComponent implements OnInit {
     this.router.navigate(['/user/ticket/pay']);
   }
   ngOnInit() {
-    
   }
 
 }

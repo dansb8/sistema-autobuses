@@ -3,14 +3,15 @@ import { User } from '../components/login/user';
 import { Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router} from '@angular/router'
-
+import { Apiback } from 'src/app/apiback'
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   currentUser: User | null;
-  loggedin: boolean;
-  prueba: boolean=false;
+  loggedin = false;
+  redirectUrl: string;
+  prueba: boolean=true;
   constructor(private _http:HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
@@ -24,16 +25,21 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: true
+        isAdmin: false
       };
+      this.loggedin=true;
+      console.log(this.isAdmin());
       if (this.isAdmin()){
-        console.log(this.isAdmin());
-        this.router.navigate(['/admin']);
+        if(this.redirectUrl){
+          this.router.navigateByUrl(this.redirectUrl);
+        }else{
+          this.router.navigate(['/admin']);
+        }
       } else {
-          console.log(this.isAdmin());
+          
           this.router.navigate(['/user']);
         }
-      this.loggedin=true;
+      
     }
     else{
     this.validation(userName,password).subscribe((user: User )=>{
@@ -42,6 +48,7 @@ export class AuthService {
       //this.currentUser.userName=user.userName;
       //this.currentUser.isAdmin=user.isAdmin;
       if( user.id!=null){
+        this.loggedin=true;
         console.log(this.currentUser);
         if (this.isAdmin()){
           console.log(this.isAdmin());
@@ -50,7 +57,7 @@ export class AuthService {
             console.log(this.isAdmin());
             this.router.navigate(['/user']);
           }
-          this.loggedin=true;
+          
       }else{
         alert("correo o contraseña invalidos");
         this.loggedin=false;
@@ -61,6 +68,8 @@ export class AuthService {
   }
   }
   logout(): void {
+    this.endsession().subscribe((res :boolean)=>{
+    });
     this.loggedin=false;
     this.currentUser = null;
   }
@@ -69,6 +78,16 @@ export class AuthService {
       'email': `${email}`,
       'password': `${password}`
     });
-    return this._http.post<User>('http://192.168.10.153:8000/api/login/',null,{headers});
+    return this._http.post<User>(Apiback.ENDPOINT+'/api/login/',null,{headers,withCredentials:true});
+  }
+  checkSession(): Observable<boolean>{
+    return this._http.post<boolean>(Apiback.ENDPOINT+'/api/logged/',null,{withCredentials:true});
+  }
+  endsession(): Observable<boolean> {
+   
+    return this._http.post<boolean>(Apiback.ENDPOINT+'/api/logout/',null,{withCredentials:true});
+  }
+  recovery(): Observable<User> {
+    return this._http.post<User>(Apiback.ENDPOINT+'/api/recover/',null,{withCredentials:true});
   }
 }

@@ -1,6 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <body>
+
+
     <div class="container">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -31,17 +30,23 @@
           <h3 class="display-4 font-italic" >Nuestras Direcciones</h3>
         </div>
       </div>
-    <div class="card col-ms-12 bg-light">
-          <h3 class="text-center bg-success">Terminal</h3>
-                <h6>{{this.NameT}}</h6>
-                <div class="p-3 mb-2 text-success text-center">DIRECCION</div> 
-                <h6>{{this.Colonia}}</h6>
-                <div class="p-3 mb-2 text-success text-center">Codigo Postal</div>
-                <h6>{{this.CodePostal}}</h6>
-                <div class="p-3 mb-2 text-success text-center">Telefono</div>
-                <h6>{{this.Phone}}</h6>
-                
-            </div>
-          </div>
-  </body>
-</html>
+    <div class="card-columns">
+      <div class="card col-sm-12 bg-success"  *ngFor="let term of terminals">
+        <div class="card-body  row">
+          <h5 class="card-title text-light col-sm-12">{{term["name"]}} {{term["state"]}}</h5>
+          <h6 class="card-text text-dark-50 col-sm-12">{{term["address"]}}</h6>
+          <h6 class="card-text text-dark-50 col-sm-12">Tel.{{term["tel"]}}, CP.{{term["zip"]}}</h6>
+        </div>      
+      </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" (click)="changePag(this.curpag-1)" *ngIf="this.numpag>1">Previous</a></li>
+            <li class="page-item" *ngFor="let item of items"><a class="page-link" href="#">{{pag}}</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+    </div>
+    
