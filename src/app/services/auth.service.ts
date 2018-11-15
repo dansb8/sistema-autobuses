@@ -9,7 +9,8 @@ import { Apiback } from 'src/app/apiback'
 })
 export class AuthService {
   currentUser: User | null;
-  loggedin: boolean;
+  loggedin = false;
+  redirectUrl: string;
   prueba: boolean=false;
   constructor(private _http:HttpClient, private router: Router) { }
 
@@ -24,16 +25,21 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: true
+        isAdmin: false
       };
+      this.loggedin=true;
+      console.log(this.isAdmin());
       if (this.isAdmin()){
-        console.log(this.isAdmin());
-        this.router.navigate(['/admin']);
+        if(this.redirectUrl){
+          this.router.navigateByUrl(this.redirectUrl);
+        }else{
+          this.router.navigate(['/admin']);
+        }
       } else {
-          console.log(this.isAdmin());
+          
           this.router.navigate(['/user']);
         }
-      this.loggedin=true;
+      
     }
     else{
     this.validation(userName,password).subscribe((user: User )=>{
@@ -74,8 +80,14 @@ export class AuthService {
     });
     return this._http.post<User>(Apiback.ENDPOINT+'/api/login/',null,{headers,withCredentials:true});
   }
+  checkSession(): Observable<boolean>{
+    return this._http.post<boolean>(Apiback.ENDPOINT+'/api/logged/',null,{withCredentials:true});
+  }
   endsession(): Observable<boolean> {
    
     return this._http.post<boolean>(Apiback.ENDPOINT+'/api/logout/',null,{withCredentials:true});
+  }
+  recovery(): Observable<User> {
+    return this._http.post<User>(Apiback.ENDPOINT+'/api/recover/',null,{withCredentials:true});
   }
 }
