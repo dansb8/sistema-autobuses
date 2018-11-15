@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service'
 import { User} from '../login/user'
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,16 +10,14 @@ import { User} from '../login/user'
 export class HomeComponent implements OnInit {
 
   loading: Boolean =true;
-  user: User;
-  constructor(private _userService: UserService) { }
+ 
+  constructor(private authService: AuthService) {
+    if(!this.authService.loggedin){
+      this.authService.logout();
+    }
+   }
 
   ngOnInit() {
-    this._userService.getUser(1).subscribe( (user: User)=>{
-      this.user=user;
-      console.log(user.userName);
-      this.loading=false;
-    }
-    )
   }
 
 }

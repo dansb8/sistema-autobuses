@@ -1,11 +1,9 @@
 <form class="jumbotron" style="margin-top:5%;" 
-    (ngSubmit)="data(dataForm)"
+    (ngSubmit)="checkPass()"
     #dataForm="ngForm"
     autocomplete="on">
-    <h1 class="display-4">Hola, Admin!</h1>
-    <p class="lead">Informacion Personal</p>
-    <hr class="my-4">
-    <p class="lead">205194</p>
+    <h1 class="display-4">Bienvenido, {{userName}}!</h1>
+    <p class="lead">Información Personal</p>
     <hr class="my-4">
     <p class="lead">Nombre completo</p>
     <div class="form-row">
@@ -13,17 +11,28 @@
           <input 
             type="text" 
             class="form-control font-italic" 
-            ngModel
             name="adminName"
-            #userNameVar="ngModel"
+            [(ngModel)]="adminName"
             [disabled]="this.flag" 
-            [placeholder]="this.name">
+            [placeholder]="this.adminName">
         </div>
         <div class="form-group col-md-3">
-            <input type="text" class="form-control font-italic" id="" [disabled]="this.flag" [placeholder]="this.last_name1">
+            <input type="text"
+             class="form-control font-italic" 
+             id="" 
+             [disabled]="this.flag" 
+             [placeholder]="this.last_name1"
+             [(ngModel)]="last_name1"
+             name="last_name1">
           </div>
         <div class="form-group col-md-3">
-              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag" [placeholder]="this.last_name2">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag" 
+              [placeholder]="this.last_name2"
+              [(ngModel)]="last_name2"
+              name="last_name2">
         </div>
         <div class="form-group col-md-2">
             <button type="button" class="btn btn-outline-dark" (click)="this.flag = !this.flag">Editar</button>
@@ -33,13 +42,25 @@
     <p class="lead">Rfc y Correo Electronico</p>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <input type="text" class="form-control font-italic" id="" [disabled]="this.flag2" [placeholder]="this.rfc">
+            <input type="text" 
+            class="form-control font-italic" 
+            id="" 
+            [disabled]="this.flag2" 
+            [placeholder]="this.rfc"
+            [(ngModel)]="rfc"
+            name="rfc">
           </div>
           <div class="form-group col-md-2">
               <button type="button" class="btn btn-outline-dark" (click)="this.flag2 = !this.flag2">Editar</button>
           </div>
           <div class="form-group col-md-4">
-              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag3" [placeholder]="this.email">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag3" 
+              [placeholder]="this.email"
+              [(ngModel)]="email"
+              name="email">
             </div>
             <div class="form-group col-md-2">
                 <button type="button" class="btn btn-outline-dark" (click)="this.flag3 = !this.flag3" >Editar</button>
@@ -49,7 +70,13 @@
       <p class="lead">Telefono</p>
       <div class="form-row">
           <div class="form-group col-md-4">
-              <input type="text" class="form-control font-italic" id="" [disabled]="this.flag4" [placeholder]="this.cel">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag4" 
+              [placeholder]="this.cel"
+              [(ngModel)]="cel"
+              name="cel">
             </div>
             <div class="form-group col-md-2">
                 <button type="button" class="btn btn-outline-dark" (click)="this.flag4 = !this.flag4">Editar</button>
@@ -57,24 +84,33 @@
         </div>
         <hr class="my-4">
         <div class="form-row">
-            <button type="button" class="btn btn-outline-dark col-md-4" (click)="this.changepass = this.changepass + 1">Cambiar Contraseña</button>
+            <button type="button" class="btn btn-outline-dark col-md-4" (click)="togglePass()">Cambiar Contraseña</button>
         </div>
-        <div *ngIf="changepass % 2 == 0">
+        <div *ngIf="changepass">
             <p class="lead"></p>
             <div class="form-row">
               <div class="form-group col-md-4">
-                  <input type="text" class="form-control font-italic" id=""  placeholder="Contraseña Actual">
+                  <input type="password" class="form-control font-italic" id="curpass"  placeholder="Contraseña Actual"
+                 [(ngModel)]="curpass"
+                 name="curpass">
+                  
                 </div>
           </div>
           <div class="form-row">
               <div class="form-group col-md-4">
-                  <input type="text" class="form-control font-italic" id="" placeholder="Nueva Contraseña">
+                  <input type="password" class="form-control font-italic" id="newpass" placeholder="Nueva Contraseña"
+                  [(ngModel)]="newpass"
+                  name="newpass">
                 </div>
           </div>
           <div class="form-row">
               <div class="form-group col-md-4">
-                  <input type="text" class="form-control font-italic" id="" placeholder="Verificar Contraseña">
+                  <input type="password" class="form-control font-italic" id="confpass" placeholder="Verificar Contraseña"
+                  [(ngModel)]="confpass"
+                  name="confpass"
+                  (change)="confPass()">
                 </div>
+                <i *ngIf="confPass()" class="fa fa-check text-success"  style="font-size:30px;"></i>
           </div>
         </div>
         <hr class="my-4">

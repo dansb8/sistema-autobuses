@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-directory',
@@ -24,6 +25,11 @@ public CodePostal: string;
     this.Phone='9612492986';
     this.CodePostal='29045';
 
+  constructor(private authService: AuthService) { 
+    if(!this.authService.loggedin){
+      this.authService.logout();
+    }
+  }
 
   }
 

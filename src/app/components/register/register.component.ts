@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-import { NgForm} from '@angular/forms'
+import { Router } from '@angular/router';
+import { NgForm} from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
 import { User } from '../../interfaces/user'
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,7 +12,11 @@ import { User } from '../../interfaces/user'
 export class RegisterComponent implements OnInit {
 
   userData: User;
-  constructor(private registerService: RegisterService, private router: Router) { }
+  constructor(private registerService: RegisterService, private router: Router, private authService: AuthService) {
+    if(!this.authService.loggedin){
+      this.authService.logout();
+    }
+   }
 
   ngOnInit() {
   }

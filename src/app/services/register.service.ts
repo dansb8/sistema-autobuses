@@ -3,7 +3,7 @@ import { Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router} from '@angular/router'
 import { User } from '../interfaces/user';
-
+import { Apiback } from 'src/app/apiback'
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +21,7 @@ export class RegisterService {
       'password': `${user.password}`,
       'rfc': `${user.rfc}`
     });
-    this._http.post<Boolean>('http://192.168.10.153:8000/api/user/register/',null,{headers}).subscribe((result: Boolean)=>{
+    this._http.post<Boolean>(Apiback.ENDPOINT+'/api/user/register/',null,{headers}).subscribe((result: Boolean)=>{
         console.log(result);
         if(result){
           this.router.navigate(['/home']);
