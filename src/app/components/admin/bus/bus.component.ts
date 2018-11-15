@@ -7,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusComponent implements OnInit {
 
-  constructor() { }
+public flag: boolean;
+model: string;
+capacity: Number;
+form_control: string;
+types: Number; 
+  constructor(){
+    this.flag = true;
+    this.model = '12easd3';
+    this.capacity = 38;
+    this.form_control= 'ASDC-5845-8286-AS41';
+    this.types=0;
+     }
 
   ngOnInit() {
   }
