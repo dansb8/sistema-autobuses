@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketComponent } from './components/user/ticket/ticket.component';
 import { SearchTicketComponent } from './components/user/ticket/search-ticket/search-ticket.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { SelectTicketComponent } from './components/user/ticket/select-ticket/select-ticket.component';
 import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-ticket.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -66,6 +67,7 @@ import { EditCardComponent } from './components/user/edit-card/edit-card.compone
     // TicketModule,
     AppRoutingModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     HttpClientModule
   ],
   providers: [],

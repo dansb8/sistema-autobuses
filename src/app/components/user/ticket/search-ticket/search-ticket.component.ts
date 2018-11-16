@@ -27,9 +27,9 @@ export class SearchTicketComponent implements OnInit {
 
    search(searchForm: NgForm): void{
     if (searchForm && searchForm.valid){
-      const origen = searchForm.form.value.origen;
-      const destino = searchForm.form.value.destino;
-      console.log(origen+"\n"+destino);
+      const origen = this.origin.id
+      const destino = this.destination.id;
+      console.log(this.origin.name+"\n"+this.destination.name);
       this.router.navigate(['/user/ticket/select']);
     } else {
       console.log("error");
