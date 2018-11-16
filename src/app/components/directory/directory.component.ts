@@ -14,7 +14,7 @@ total: any;
 numpag: any;
 curpag: any;
   constructor(private authService: AuthService,private termService: TerminalService) { 
-    if(!this.authService.loggedin){
+    if(!this.authService.loggedin && !this.authService.prueba){
       this.authService.logout();
     }
     this.curpag=1;
@@ -24,7 +24,6 @@ curpag: any;
         this.numpag=this.total/6;
         if(this.total%6!=0)
         this.numpag++;
-        
       });
     }
     else{
@@ -34,6 +33,8 @@ curpag: any;
   }
   ngOnInit() {
     if(this.authService.prueba){
+      this.total=25;
+      if(this.curpag==1)
       this.terminals=[{
         id: 1,
         city: "Aguascalientes",
@@ -52,14 +53,35 @@ curpag: any;
         zip: "20210",
         state:"JAL"
       }];
+      else
+      this.terminals=[{
+        id: 1,
+        city: "Culiacan",
+        name: "Central Camionera CUL",
+        address: "Av ags 123 Col. Las americas",
+        tel: "96452836",
+        zip: "20210",
+        state:"CUL"
+      },
+      {
+        id: 2,
+        city: "Chiapas",
+        name: "Central Camionera CHI",
+        address: "Av ags 123 Col. Las americas",
+        tel: "96452836",
+        zip: "20210",
+        state:"CHI"
+      }];
     }else{
       this.termService.getterminals(this.curpag).subscribe((terminals: Terminal[])=>{
         this.terminals=terminals;
       })
     }
   }
-  changePag(pag){
-    this.curpag=pag;
+  pageChanged(event: any): void {
+    this.curpag = event.page;
+    console.log(this.curpag);
+    this.ngOnInit();
   }
 
 }
