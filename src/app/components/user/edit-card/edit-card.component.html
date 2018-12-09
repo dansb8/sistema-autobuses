@@ -1,94 +1,78 @@
-<form class="jumbotron" style="margin-top:5%;">
-  <h1 class="display-4">Daniel Fermin Romo Lopez</h1>
-  <p class="lead">Editar tarjeta</p>
-  <hr class="my-4">
-  <p class="lead">ID: 221903</p>
-  <hr class="my-4">
-  <p class="lead">Propietario</p>
+<div class="alert alert-success" role="alert" *ngIf="alert"alert-dismissible>
+  <strong>Tarjeta agregada</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form class="jumbotron" style="margin-top:5%;" (ngSubmit)="addCard(cardform)"
+#cardform="ngForm">
+  <p class="lead">Nueva tarjeta</p>
+  <p class="lead">Nombre del titular</p>
   <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-8">
       <input 
         type="text" 
-        class="form-control-plaintext" 
-        [disabled]="this.flag">
-    </div>
-    <div class="form-group col-md-3">
-      <input 
-        type="text" 
-        class="form-control-plaintext"
-        [disabled]="this.flag">
-    </div>
-    <div class="form-group col-md-3">
-      <input 
-        type="text" 
-        class="form-control-plaintext"
-        [disabled]="this.flag">
-    </div>
-    <div class="form-group col-md-2">
-      <button type="button" class="btn btn-outline-dark" (click)="this.flag = !this.flag">Editar</button>
+        class="form-control"
+        placeholder="Titular"
+        [(ngModel)]="name"
+        name="name"
+        >
     </div>
   </div>
   <hr class="my-4">
   <p class="lead">Numero de la tarjeta</p>
   <div class="form-row">
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-6">
       <input 
         type="text"
-        maxlength="4"
-        name="numbers1"
-        class="form-control" 
-        [disabled]="this.flag2">
+        maxlength="19"
+        [(ngModel)]="cardnum"
+        name="cardnum"
+        class="form-control"
+        placeholder="XXXX-XXXX-XXXX-XXXX"
+        (keydown)="format($event)">
     </div>
-    <div class="form-group col-md-1">
-      <input 
-        type="text"
-        maxlength="4" 
-        class="form-control" 
-        [disabled]="this.flag2">
-    </div>
-    <div class="form-group col-md-1">
-      <input 
-        type="text"
-        maxlength="4" 
-        class="form-control" 
-        [disabled]="this.flag2">
-    </div>
+    <p class="lead">Codigo Seguridad</p>
     <div class="form-group col-md-1">
       <input 
         type="text" 
         maxlength="4"
-        class="form-control" 
-        [disabled]="this.flag2">
-    </div>
-    <div class="form-group col-md-4">
-      <button type="button" class="btn btn-outline-dark" (click)="this.flag2 = !this.flag2" >Editar</button>
+        class="form-control"
+        placeholder="XXX"
+        [(ngModel)]="cvc"
+        name="cvc">
     </div>
   </div>
   <hr class="my-4">
-  <p class="lead">Compañia</p>
+  <label class="lead col-md-4">Compañia</label>
+  <label class="lead col-md-4">Tipo</label>
   <div class="form-row">
-    <select name="" class="form-control col-md-4">
-      <option value="">MasterCard</option>
-      <option value="">Visa</option>
+    <select name="company" [(ngModel)]="company" class="form-control col-md-4">
+      <option selected hidden>Escoge...</option>
+      <option value="MasterCard">MasterCard</option>
+      <option value="Visa">Visa</option>
     </select>
+    
+    <select name="type" [(ngModel)]="type" class="form-control col-md-4">
+        <option value=1>Credito</option>
+        <option value=0>Debito</option>
+      </select>
   </div>
   <hr class="my-4">
   <p class="lead">Fecha de expiracion</p>
   <div class="form-row">
     <div class="form-group col-md-1">
-      <input type="text" name="date1" class="form-control" [disabled]="this.flag3">
+      <input type="text" placeholder="MM" [(ngModel)]="expmonth" name="expmonth" class="form-control" maxlength="2">
     </div>
     <div class="form-group col-md-1">
-      <input type="text" name="date2" class="form-control" [disabled]="this.flag3">
-    </div>
-    <div class="form-group col-md-4">
-      <button type="button" class="btn btn-outline-dark" (click)="this.flag3 = !this.flag3" >Editar</button>
+      <input type="text" name="expyear" placeholder="YYYY" class="form-control" maxlength="4" [(ngModel)]="expyear">
     </div>
   </div>
   <hr class="my-4">
   <button 
     type="submit"  
-    class="btn btn-outline-dark col-md-4">
-      Guardar Cambios
+    class="btn btn-outline-dark col-md-4"
+    [disabled]="!cardform.valid">
+      Guardar tarjeta
   </button>
 </form>

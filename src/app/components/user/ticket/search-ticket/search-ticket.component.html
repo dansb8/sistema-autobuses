@@ -58,7 +58,8 @@
                                                         placeholder="Escoge una fecha"
                                                         class="form-control"
                                                         bsDatepicker
-                                                       
+                                                        [minDate]="minDate"
+                                                        [maxDate]="maxDate"
                                                         [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
                                                         required
                                                         [(ngModel)]="fecha"
@@ -96,6 +97,7 @@
                           required
                           [(ngModel)]="numboletos"
                           name="numboletos"
+                          (change)="calc_desc()"
                           >
                     <option value=1 selected>1</option>
                     <option value=2>2</option>
@@ -147,6 +149,7 @@
                                                         required
                                                         [(ngModel)]="tipo_pas[i]"
                                                         name="tipo_pas[i]"
+                                                        (change)="calc_desc()"
                                                 >
                                                 <option value="normal" selected >Normal</option>
                                                 <option value="estudiante">Estudiante</option>
@@ -159,8 +162,9 @@
                                 <h5 *ngIf="numboletos>0">Costo Boletos</h5>
                                 <h6 *ngIf="numboletos>0">Por persona:${{this.time["cost"]}} MXN</h6>
                                 <h6 *ngIf="numboletos>0">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
-                                <h6 *ngIf="numboletos>0">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
-                                <h6 *ngIf="numboletos>0">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                <h6 *ngIf="numboletos>0">IVA:${{this.total_iva}} MXN</h6>
+                                <h6 ng *ngIf="numboletos>0 && descuento>0">Descuento:$ {{descuento}}</h6>
+                                <h6 *ngIf="numboletos>0">Total:${{this.pay_total}} MXN</h6>
                           </div>
           </div>
           
@@ -178,12 +182,18 @@
 <form *ngIf="select_valid"
         (ngSubmit)="pay(payForm)"
         #payForm="ngForm">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="pay_valid && showalert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="pay_valid && showalert">
                         <strong>Compra exitosa!</strong>{{this.message}}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="!pay_valid && showalert">
+                        <strong>No se pudo completar la compra!</strong>{{this.message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+        </div>
         <div class="progress" style="height: 30px">
                         <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Pago" aria-valuemin="0" aria-valuemax="100">Pago</div>
                       </div>
@@ -207,14 +217,15 @@
                                                 <h5 *ngIf="numboletos>0">Costo Boletos</h5>
                                                 <h6 *ngIf="numboletos>0">Por persona:${{this.time["cost"]}} MXN</h6>
                                                 <h6 *ngIf="numboletos>0">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
-                                                <h6 *ngIf="numboletos>0">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
-                                                <h6 *ngIf="numboletos>0">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                                <h6 *ngIf="numboletos>0">IVA:${{this.total_iva}} MXN</h6>
+                                                <h6 ng *ngIf="numboletos>0 && descuento>0">Descuento:$ {{descuento}}</h6>
+                                                <h6 *ngIf="numboletos>0">Total:${{this.pay_total}} MXN</h6>
                                           </div>
                                           <div class="form-row justify-content-around">
                                                         <button class="btn btn-info" (click)="regresar(2)">Regresar</button>
                                                     <button type="submit" 
                                                             class="btn btn-success"
-                                                            [disabled]="!payForm.valid">Pagar
+                                                            [disabled]="!payForm.valid && pay_valid">Pagar
                                                     </button>
                                                 </div>
                                 </div>

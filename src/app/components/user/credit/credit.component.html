@@ -1,18 +1,33 @@
-<div class="card-columns">
-  <div class="card border-dark" style="width:300px" *ngFor="let card of cards">
+<div class="row">
+  <div class="card border-dark col-md-4" style="max-width:400px"  *ngFor="let card of cards">
   <img class="card-img-top" src="/src/images/mastercard.jpg" *ngIf="card['company']=='MasterCard'" alt="Card image">
   <img class="card-img-top" src="/src/images/visa.png" *ngIf="card['company']=='Visa'" alt="Card image">
     <div class="card-body text-dark row">
       <h4 class="card-title col-sm-12"> {{card["owner"]}} </h4>
       <h6 class="card-text col-sm-12">{{card["number"]}} </h6>
-      <h6 class="card-text col-sm-6 text-muted text-center">Valida hasta</h6>
-      <p class="card-text col-sm-6 text-center">{{card["date"]}} </p>
-      <div class="col-sm-12">
-        <button class="btn btn-dark " (click)="delete(card['id'])">Eliminar tarjeta</button>
+      <h6 class="card-text col-sm-4 text-muted text-center">Valida hasta</h6>
+      <p class="card-text col-sm-4 text-center">{{card["date"]}}</p>
+      <div class="col-md-12">
+        <button class="btn btn-dark col-md-6" (click)="delete(card['id'])">Eliminar</button>
+        <button class="btn btn-dark col-md-6" (click)="toggledetails(card['id'])">Detalles</button>
       </div>
     </div>
   </div> 
-    <button class="btn btn-dark" (click)="showEdit()">{{this.edit}}</button>
 </div>
-<app-edit-card *ngIf="this.counter % 2 !== 0"></app-edit-card>
+<div class="row">
+    <button class="btn btn-info col-sm-3 offset-md-8" (click)="toggleNew()">Agregar Tarjeta</button>
+</div>
+<div class="jumbotron" *ngIf="details">
+    <h5>Detalles de tarjeta</h5>
+  <div class="row" *ngFor="let item of report">
+    <label>Mensaje: </label>
+    <strong>{{item["message"]}}</strong>
+    <label>Fecha: </label>
+    <strong>{{item["date"]}}</strong>
+    <label>Hora: </label>
+    <strong>{{item["time"]}}</strong>
+    <hr class="my-4">
+  </div>
+</div>
+<app-edit-card *ngIf="addnew"></app-edit-card>
 <router-outlet></router-outlet>

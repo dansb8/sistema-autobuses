@@ -49,4 +49,23 @@ export class UserService {
     console.log(id);
     return this.http.post<Boolean>(Apiback.ENDPOINT+'/api/cards/delete/',null,{headers,withCredentials:true});
   }
+  addcard(name: string,type: number, company: string, id: number, expmonth: number,expyear: number, num: string,cvc:number):Observable<boolean>{
+    const headers= new HttpHeaders({
+      'id_user': `${id}`,
+      'name': `${name}`,
+      'type': `${type}`,
+      'company': `${company}`,
+      'expmonth': `${expmonth}`,
+      'expyear': `${expyear}`,
+      'card_num': `${num}`,
+      'cvc': `${cvc}`
+    });
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/cards/add/',null,{headers,withCredentials:true});
+  }
+  carddetails(id:number):Observable<any[]>{
+    const headers= new HttpHeaders({
+      'id_card': `${id}`
+    });
+    return this.http.post<any[]>(Apiback.ENDPOINT+'/api/cards/details/',null,{headers,withCredentials:true});
+  }
 }

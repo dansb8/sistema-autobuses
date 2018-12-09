@@ -14,10 +14,13 @@ export class TerminalService {
 
   constructor(private http: HttpClient) { }
   getterminals(pag: number): Observable<Terminal[]>{
-    return this.http.get<Terminal[]>(Apiback.ENDPOINT+'/api/terminal/directory/'+pag);
+    const headers = new HttpHeaders({
+      'pag': `${pag}`
+    });
+    return this.http.post<Terminal[]>(Apiback.ENDPOINT+'/api/terminal/directory/',null,{headers});
   }
-  gettotalterm():Observable<Number>{
-    return this.http.get<Number>(Apiback.ENDPOINT+'/api/terminal/total');
+  gettotalterm():Observable<number>{
+    return this.http.get<number>(Apiback.ENDPOINT+'/api/terminal/total');
   }
   getorigins():Observable<Terminal[]>{
     return this.http.post<Terminal[]>(Apiback.ENDPOINT+'/api/terminal/origins/',null,{withCredentials:true});
@@ -45,7 +48,7 @@ export class TerminalService {
   validatePay(paydata: Paydata):Observable<Payresp>{
     const headers = new HttpHeaders({
       'id_card':`${paydata.card.id}`,
-      'costo':`${paydata.total}`
+      'cost':`${paydata.total}`
     })
     return this.http.post<Payresp>(Apiback.ENDPOINT+'/api/terminal/payment/',null,{headers,withCredentials:true})
   }
@@ -64,6 +67,14 @@ export class TerminalService {
       'id_card': `${id_card}`
     })
     return this.http.post<boolean>(Apiback.ENDPOINT+'/api/ticketinfo/',null,{headers,withCredentials:true})
+  }
+  text(id: number, charge:number, message: string):Observable<boolean>{
+    const headers=new HttpHeaders({
+      'id_user': `${id}`,
+      'cost': `${charge}`,
+      'message': `${message}`
+    })
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/phone/',null,{headers,withCredentials:true})
   }
 
 }

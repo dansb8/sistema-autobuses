@@ -3,6 +3,7 @@ import { Card } from 'src/app/interfaces/card';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService} from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-credit',
@@ -12,11 +13,24 @@ import { Router } from '@angular/router';
 export class CreditComponent implements OnInit {
   id: number;
   cards: Card[];
-  counter = 0;
-  edit = 'Editar tarjeta';
-  constructor(private userservice: UserService, private authService: AuthService, private router: Router) { }
+  addnew: boolean;
+  details: boolean;
+  report: any[];
+  constructor(private userservice: UserService, private authService: AuthService, private router: Router) {
+    this.report=[{
+      message:"mensaje 1",
+      date: "12/12/2018",
+      time: "18:25:30"
+    },
+    {
+      message:"mensaje 2",
+      date: "12/12/2019",
+      time: "21:25:30"
+    }]
+   }
 
   ngOnInit() {
+    this.addnew=false
     if( this.authService.prueba){
       this.cards=[
         {id: 1,
@@ -53,14 +67,13 @@ export class CreditComponent implements OnInit {
     }
     
   }
-  showEdit() {
-    this.counter++;
-    if ( this.counter % 2 !== 0 ) {
-      this.edit = 'Ocultar';
-    } else {
-      this.edit = 'Editar tarjeta';
-    }
-  }
+ toggleNew(){
+   if(this.addnew){
+     this.addnew=false
+   }
+   else
+   this.addnew=true
+ }
   delete(id: number): void  {
     this.userservice.deletecard(id).subscribe((result: Boolean) => {
       console.log(result);
@@ -68,5 +81,16 @@ export class CreditComponent implements OnInit {
         this.ngOnInit();
       }
       });
+  }
+  toggledetails(id: number):void{
+    if(this.details)
+    this.details=false
+    else
+    this.details=true
+    if(!this.authService.prueba){
+      this.userservice.carddetails(id).subscribe((res: any)=>{
+        this.report=res;
+      })
+    }
   }
 }
