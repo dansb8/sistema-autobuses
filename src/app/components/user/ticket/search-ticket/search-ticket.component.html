@@ -1,9 +1,11 @@
-<div class="progress" style="height: 30px">
-        <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
-      </div>
-<form   novalidate
+
+<form   *ngIf="!search_valid"
+        novalidate
         (ngSubmit)="search(searchform)"
         #searchform="ngForm">
+        <div class="progress" style="height: 30px">
+                <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
+              </div>
         <fieldset>
             <div class="form-goup">
                     <div class="form-row">
@@ -14,8 +16,7 @@
                                         [(ngModel)]="origin"
                                         name="origin"
                                         (change)="checkDest()">
-                                                <option [ngValue]="x" *ngFor="let x of terminals"
-                                                        >
+                                                <option [ngValue]="x" *ngFor="let x of terminals">
                                                 {{x["name"]}},{{x["city"]}} {{x["state"]}}</option>
                                 </select>
                             </div>
@@ -23,10 +24,11 @@
                                 <label for="destino">Destino</label>
                                 <select id="destino"
                                         class="form-control"
-                                        [disabled]="this.destsel"
+                                        [disabled]="this.origsel==false"
                                         required
                                         [(ngModel)]="destination"
                                         name="destination"
+                                        (change)="checkHora()"
                                         >
                                         <option [ngValue]="y" *ngFor="let y of destinations"
                                         >
@@ -35,31 +37,187 @@
                             </div>
                         </div>
                         <div class="form-row">
-                                <div class="col-xs-12 col-12 col-md-4 form-group">
-                                    <label for="fecha">Fecha</label>  
-                                    <input type="text"
-                                        placeholder="Escoge una fecha"
-                                        class="form-control"
-                                        bsDatepicker
-                                        [minDate]="minDate"
-                                        [maxDate]="maxDate"
-                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
-                                        required
-                                        ngModel
-                                        name="fecha"
-                                        autocomplete="off"
-                                    >
-                                </div>
+                                        <div class="form-group col-md-6">
+                                                        <label>Horario</label>
+                                                        <select id="horario"
+                                                                class="form-control"
+                                                                [disabled]="!this.destsel"
+                                                                required
+                                                                [(ngModel)]="time"
+                                                                name="time"
+                                                        >
+                                                        <option value="" selected disabled>Seleccione una hora</option>
+                                                        <option [ngValue]="z" *ngFor="let z of times">
+                                                                {{z["time"]}}
+                                                        </option>
+                                                        </select>
+                                                </div>
+                                        <div class="form-group col-md-6">
+                                                <label>Fecha</label>  
+                                                <input type="text"
+                                                        placeholder="Escoge una fecha"
+                                                        class="form-control"
+                                                        bsDatepicker
+                                                       
+                                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
+                                                        required
+                                                        [(ngModel)]="fecha"
+                                                        name="fecha"
+                                                        autocomplete="off"
+                                                >
+                                        </div>
                         </div>
+                        
                         <div class="form-row justify-content-around">
                                 <button type="submit" 
                                         class="btn btn-success"
                                         [disabled]="!searchform.valid"
                                 >
-                                  Aceptar
+                                  Siguiente
                                 </button>
                         </div>
             </div>
         </fieldset>
         
+</form>
+<form *ngIf="search_valid && !select_valid"
+    (ngSubmit)="select(selectForm)"
+    #selectForm="ngForm">
+    <div class="progress" style="height: 30px">
+        <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="Seleccion" aria-valuemin="0" aria-valuemax="100">Selección</div>
+      </div>
+    <fieldset>
+        <div class="form-group">
+          <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="numboletos">Num Boletos</label>
+                  <select id="numboletos"
+                          class="form-control"
+                          required
+                          [(ngModel)]="numboletos"
+                          name="numboletos"
+                          >
+                    <option value=1 selected>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                  </select>
+                </div>
+                
+                <div class="col-12" *ngFor="let item of name_pas; let i=index">
+                        <div class="form-row ">
+                                <input  type="text"
+                                                class="form-control col-md-4"
+                                                id="nombre" 
+                                                placeholder="Nombre"
+                                                [(ngModel)]="name_pas[i].name"
+                                                name="name_pas[i].name"
+                                                required
+                                                *ngIf="numboletos>i">
+                                <input  type="text"
+                                                class="form-control col-md-4"
+                                                id="apepat" 
+                                                placeholder="Apellido Paterno"
+                                                [(ngModel)]="name_pas[i].apepat"
+                                                name="name_pas[i].apepat"
+                                                required
+                                                *ngIf="numboletos>i">
+                                <input  type="text"
+                                                class="form-control col-md-4"
+                                                id="apemat" 
+                                                placeholder="Apellido Materno"
+                                                [(ngModel)]="name_pas[i].apemat"
+                                                name="name_pas[i].apemat"
+                                                required
+                                                *ngIf="numboletos>i">
+                                <label class="form control col-md-3" *ngIf="numboletos>i">Asiento</label>
+                                <select 
+                                        class="form-control col-md-3"
+                                        required
+                                        [(ngModel)]="sel_seat[i]"
+                                        name="sel_seat[i]" *ngIf="numboletos>i">
+                                        <option [ngValue]=w *ngFor="let w of seatsAva">{{w}}</option>
+        
+                                </select>
+                                <label class="col-md-3" *ngIf="numboletos>i">Tipo</label>
+                                <div class="form-group col-md-3" *ngIf="numboletos>i">
+                                                <select id="tipo"
+                                                        class="form-control"
+                                                        required
+                                                        [(ngModel)]="tipo_pas[i]"
+                                                        name="tipo_pas[i]"
+                                                >
+                                                <option value="normal" selected >Normal</option>
+                                                <option value="estudiante">Estudiante</option>
+                                                </select>
+                                        </div>
+                        </div>
+                                
+                </div>
+                <div class="col-md-12">
+                                <h5 *ngIf="numboletos>0">Costo Boletos</h5>
+                                <h6 *ngIf="numboletos>0">Por persona:${{this.time["cost"]}} MXN</h6>
+                                <h6 *ngIf="numboletos>0">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
+                                <h6 *ngIf="numboletos>0">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                <h6 *ngIf="numboletos>0">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                          </div>
+          </div>
+          
+          <div class="form-row justify-content-around">
+                  <button class="btn btn-info" (click)="regresar(1)">Regresar</button>
+              <button type="submit" 
+                      class="btn btn-success"
+                      [disabled]="!selectForm.valid">Siguiente
+              </button>
+          </div>
+          </div>
+    </fieldset>
+    
+</form>
+<form *ngIf="select_valid"
+        (ngSubmit)="pay(payForm)"
+        #payForm="ngForm">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="pay_valid && showalert">
+                        <strong>Compra exitosa!</strong>{{this.message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+        <div class="progress" style="height: 30px">
+                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Pago" aria-valuemin="0" aria-valuemax="100">Pago</div>
+                      </div>
+        <fieldset>
+                <div class="form-group">
+                                <div class="d-block my-3">
+                                        <label class="form control col-md 4">Seleccione forma de pago</label>
+                                        <select id="card_pay"
+                                                class="form-control"
+                                                required
+                                                [(ngModel)]="cardpay"
+                                                name="cardpay"
+                                                (change)="prueba()"
+                                        >
+                                        <option [ngValue]="w" *ngFor="let w of cards">
+                                                {{w["number"]}},{{w["company"]}}
+                                        </option>
+                                        </select>   
+                                </div>
+                                <div class="col-md-12">
+                                                <h5 *ngIf="numboletos>0">Costo Boletos</h5>
+                                                <h6 *ngIf="numboletos>0">Por persona:${{this.time["cost"]}} MXN</h6>
+                                                <h6 *ngIf="numboletos>0">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
+                                                <h6 *ngIf="numboletos>0">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                                <h6 *ngIf="numboletos>0">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                          </div>
+                                          <div class="form-row justify-content-around">
+                                                        <button class="btn btn-info" (click)="regresar(2)">Regresar</button>
+                                                    <button type="submit" 
+                                                            class="btn btn-success"
+                                                            [disabled]="!payForm.valid">Pagar
+                                                    </button>
+                                                </div>
+                                </div>
+                               
+        </fieldset>
 </form>
