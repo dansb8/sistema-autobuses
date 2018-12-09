@@ -13,21 +13,19 @@ terminals: Terminal[];
 total: any;
 numpag: any;
 curpag: any;
-  constructor(private authService: AuthService,private termService: TerminalService) { 
-    if(!this.authService.loggedin && !this.authService.prueba){
+  constructor(private authService: AuthService, private termService: TerminalService) {
+    if (!this.authService.loggedin && !this.authService.prueba){
       this.authService.logout();
     }
-    this.curpag=1;
-    if(!this.authService.prueba){
-      this.termService.gettotalterm().subscribe((res:Number)=>{
-        this.total=res;
-        this.numpag=this.total/6;
-        if(this.total%6!=0)
-        this.numpag++;
+    this.curpag = 1;
+    if (!this.authService.prueba) {
+      console.log('hola');
+      this.termService.gettotalterm().subscribe((res: number ) => {
+        this.total = res[0].total;
+        console.log(res);
       });
-    }
-    else{
-      this.numpag=3;
+    } else {
+      this.numpag = 3;
     }
 
   }
@@ -37,7 +35,7 @@ curpag: any;
       if(this.curpag==1)
       this.terminals=[{
         id: 1,
-        city: "Aguascalientes",
+        city: 'Aguascalientes',
         name: "Central Camionera Ags",
         address: "Av ags 123 Col. Las americas",
         tel: "96452836",
@@ -72,10 +70,10 @@ curpag: any;
         zip: "20210",
         state:"CHI"
       }];
-    }else{
-      this.termService.getterminals(this.curpag).subscribe((terminals: Terminal[])=>{
-        this.terminals=terminals;
-      })
+    } else {
+      this.termService.getterminals(this.curpag).subscribe((terminals: Terminal[]) => {
+        this.terminals = terminals;
+      });
     }
   }
   pageChanged(event: any): void {
