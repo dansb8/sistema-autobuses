@@ -11,6 +11,11 @@ import { Card } from 'src/app/interfaces/card';
 import { UserService} from 'src/app/services/user.service';
 import { Paydata } from 'src/app/interfaces/paydata';
 import { Payresp } from 'src/app/interfaces/payresp';
+<<<<<<< HEAD
+=======
+// import { runInThisContext } from 'vm';
+import { NgAnalyzedFile } from '@angular/compiler';
+>>>>>>> dev
 
 @Component({
   selector: 'app-search-ticket',
@@ -47,9 +52,15 @@ export class SearchTicketComponent implements OnInit {
   showalert:boolean;
   pay_total:any;
   tipo_pas:any[];
+<<<<<<< HEAD
   pay_charged:number;
   descuento:  number;
   total_iva: number;
+=======
+  preloader = false; // eliminar
+  preloader2 = false; // eliminar
+  destiny = false;
+>>>>>>> dev
   constructor(private router: Router,private authService: AuthService,private terminalservice: TerminalService,private userservice: UserService) {
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -255,6 +266,9 @@ export class SearchTicketComponent implements OnInit {
       this.times=times;
     });
   }
+  // aqui empieza
+
+  // aqui termina
   pay_met(){
     if( this.authService.prueba){
       this.cards=[
