@@ -49,8 +49,9 @@
             [placeholder]="bus.type">
             <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.type_edit[i] = !this.type_edit[i];this.update_change[i]=true">Editar</button>
         </div>     
-        <button class=" btn btn-info col-md-4" (click)="updatebus(bus)" *ngIf="update_change[i]">Actualizar Datos</button>
+        <button class=" btn btn-outline-info col-md-4" (click)="updatebus(bus)" *ngIf="update_change[i]">Actualizar Datos</button>
         <button class=" btn btn-danger col-md-4" (click)="deletebus(bus)">Eliminar</button>   
+
       </form>  
         
 </div>
