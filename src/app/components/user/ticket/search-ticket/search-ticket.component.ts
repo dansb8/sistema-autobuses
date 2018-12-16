@@ -11,6 +11,7 @@ import { Card } from 'src/app/interfaces/card';
 import { UserService} from 'src/app/services/user.service';
 import { Paydata } from 'src/app/interfaces/paydata';
 import { Payresp } from 'src/app/interfaces/payresp';
+
 @Component({
   selector: 'app-search-ticket',
   templateUrl: './search-ticket.component.html',
@@ -136,9 +137,9 @@ export class SearchTicketComponent implements OnInit {
     this.terminalservice.validatePay(this.paydata).subscribe((payresp: Payresp)=>{
       this.pay_valid=payresp.result
       this.message=payresp.message
-      this.showalert=true
       console.log(payresp)
       if(payresp.result){
+        this.showalert=true
         for(let i=0;i<this.numboletos;i++){
           this.terminalservice.sendTicket(this.sel_seat[i],this.name_pas[i],this.authService.currentUser.id,this.tipo_pas[i],this.time,this.dia,this.time.cost,this.time.iva,this.cardpay.id).subscribe((aceptado: any)=>{
             if(!aceptado.result){
@@ -147,7 +148,10 @@ export class SearchTicketComponent implements OnInit {
             this.pay_charged+=aceptado.total;
           });
         }
-        this.router.navigate(['/user/ticket']);
+        this.router.navigate(['/user/cards']);
+      }
+      else{
+        this.showalert=true;
       }
       this.terminalservice.text(this.authService.currentUser.id,this.pay_total,this.message).subscribe((res: boolean)=>{
         console.log(res)
@@ -163,9 +167,21 @@ export class SearchTicketComponent implements OnInit {
   regresar(n: number):void {
     if(n==1){
       this.search_valid=false
+      this.descuento=0
     }
     if(n==2){
       this.select_valid=false
+      this.sel_seat=[0,0,0,0,0]
+      this.aux=[0,0,0,0,0]
+      this.name_pas=[{name:"",apepat:"",apemat:""},{name:"",apepat:"",apemat:""},{name:"",apepat:"",apemat:""},{name:"",apepat:"",apemat:""},{name:"",apepat:"",apemat:""}];
+      this.pay_valid=false;
+      this.showalert=false;
+      this.tipo_pas=["","","","",""]
+      this.descuento=0
+      this.pay_total=0
+      this.total_iva=0
+      this.pay_total=0
+      this.numboletos=0
     }
   }
   terminar():void{
