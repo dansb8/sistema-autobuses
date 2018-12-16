@@ -11,7 +11,7 @@ export class AuthService {
   currentUser: User | null;
   loggedin = false;
   redirectUrl: string;
-  prueba: boolean=true;
+  prueba: boolean=false;
   constructor(private _http:HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
@@ -25,7 +25,7 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: false
+        isAdmin: true
       };
       this.loggedin=true;
       console.log(this.isAdmin());

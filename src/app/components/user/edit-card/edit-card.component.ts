@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-
+declare var $: any; // para jquery
 @Component({
   selector: 'app-edit-card',
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.css']
 })
 export class EditCardComponent implements OnInit {
-  
+
   name: string
   cardnum: string
   expmonth: number
@@ -21,7 +21,7 @@ export class EditCardComponent implements OnInit {
   constructor(private userService:UserService,private authService: AuthService) {}
 
   ngOnInit() {
-    this.alert=false;
+    this.alert = false;
   }
   addCard(cardform: NgForm){
     if(!this.authService.prueba){

@@ -11,12 +11,6 @@ import { Card } from 'src/app/interfaces/card';
 import { UserService} from 'src/app/services/user.service';
 import { Paydata } from 'src/app/interfaces/paydata';
 import { Payresp } from 'src/app/interfaces/payresp';
-<<<<<<< HEAD
-=======
-// import { runInThisContext } from 'vm';
-import { NgAnalyzedFile } from '@angular/compiler';
->>>>>>> dev
-
 @Component({
   selector: 'app-search-ticket',
   templateUrl: './search-ticket.component.html',
@@ -52,15 +46,9 @@ export class SearchTicketComponent implements OnInit {
   showalert:boolean;
   pay_total:any;
   tipo_pas:any[];
-<<<<<<< HEAD
   pay_charged:number;
   descuento:  number;
   total_iva: number;
-=======
-  preloader = false; // eliminar
-  preloader2 = false; // eliminar
-  destiny = false;
->>>>>>> dev
   constructor(private router: Router,private authService: AuthService,private terminalservice: TerminalService,private userservice: UserService) {
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -109,7 +97,7 @@ export class SearchTicketComponent implements OnInit {
         console.log(this.name_pas[i].name.length)
         if(this.name_pas[i].name.length<2||this.name_pas[i].apepat.length<2||this.name_pas[i].apemat.length<2){
           alert("Escriba el nombre del pasajero"+(i+1))
-          ban=false
+          ban=false 
         }
         if(this.sel_seat[i]==0){
           alert("Seleccione el asiento del pasajero"+(i+1))

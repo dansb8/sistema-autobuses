@@ -28,13 +28,20 @@ export class AdminService {
       'password': `${user.password}`,
       'rfc': `${user.rfc}`
     });
-    return this.http.post<Boolean>(Apiback.ENDPOINT+'/api/admin/update',null,{headers,withCredentials:true});
+    return this.http.post<Boolean>(Apiback.ENDPOINT + '/api/admin/update', null, {headers, withCredentials: true});
   }
-  checkPass(id: number, pass: string): Observable<boolean>{
+  checkPass(id: number, pass: string): Observable<boolean> {
     const headers = new HttpHeaders({
       'id': `${id}`,
       'password': `${pass}`
     });
-    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/admin/checkpass',null,{headers,withCredentials:true});
+    return this.http.post<boolean>(Apiback.ENDPOINT + '/api/admin/checkpass', null, {headers, withCredentials: true});
+  }
+  getReport(year: number): Observable< Array<any>> {
+    const headers = new HttpHeaders({
+      'year': `${year}`
+    });
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/year', null, {headers, withCredentials: true});
+
   }
 }

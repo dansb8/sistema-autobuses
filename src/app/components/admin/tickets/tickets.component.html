@@ -1,3 +1,102 @@
-<p>
-  tickets works!
-</p>
+
+
+<div class="card" style="margin-top:2%;">
+    <div class="card-header bg-dark">
+        <p class="lead text-center" style="color:#fff;">Reportes</p>
+      </div>
+      <div class="card-body">
+          <div id="accordion">
+              <div class="card">
+                <div class="card-header bg-dark" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Reporte de ventas anuales
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                      <div class="jumbotron bg-dark" style="margin-top:2%;">
+                          <p class="lead" style="color: #fff;">Ventas Anuales</p>
+                          <hr class="my-4 bg-white" >
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div style="display: block; color: #fff;">
+                            <canvas baseChart width="400" height="400"
+                                        [datasets]="lineChartData"
+                                        [labels]="lineChartLabels"
+                                        [options]="lineChartOptions"
+                                        [colors]="lineChartColors"
+                                        [legend]="lineChartLegend"
+                                        [chartType]="lineChartType"
+                                        (chartHover)="chartHovered($event)"
+                                        (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                          </div>
+                          <div class="col-md-6" style="margin-bottom: 10px">
+                            <form >
+                                <p class="lead" style="color: #fff;">Selecciona el año</p>
+                                <hr class="my-4 bg-white" >
+                                <div class="form-row">
+                                  <select  name="year" [(ngModel)]="year" class="form-control">
+                                      <option value=2018>2018</option>
+                                      <option value=2017>2017</option>
+                                    </select>
+                              </div>
+                              <hr class="my-4 bg-white" >
+                              <div class="form-row">
+                                <button (click)="getReport()" class="btn btn-success">Generar reporte</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header bg-dark" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Reporte de ventas mensuales
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="jumbotron bg-dark">
+                        <div>
+                            <div style="display: block">
+                              <canvas baseChart
+                                      [datasets]="barChartData"
+                                      [labels]="barChartLabels"
+                                      [options]="barChartOptions"
+                                      [legend]="barChartLegend"
+                                      [chartType]="barChartType"
+                                      (chartHover)="chartHovered($event)"
+                                      (chartClick)="chartClicked($event)"></canvas>
+                            </div>
+                            <button (click)="randomize()">Update</button>
+                          </div>
+                    </div>
+                      
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header bg-dark" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Otro reporte
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card">
+                      Aqui va otro reporte
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+</div>

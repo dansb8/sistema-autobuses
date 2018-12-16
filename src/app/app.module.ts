@@ -31,6 +31,8 @@ import { PayTicketComponent } from './components/user/ticket/pay-ticket/pay-tick
 import { HttpClientModule } from '@angular/common/http';
 import { PersonaldataComponent } from './components/admin/personaldata/personaldata.component';
 import { EditCardComponent } from './components/user/edit-card/edit-card.component';
+import * as $ from 'jquery';
+import { ChartsModule } from 'ng2-charts';
 // rutas
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { EditCardComponent } from './components/user/edit-card/edit-card.compone
     AppRoutingModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
