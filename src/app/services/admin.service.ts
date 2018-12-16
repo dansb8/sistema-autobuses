@@ -8,7 +8,7 @@ import { Apiback } from 'src/app/apiback'
 })
 export class AdminService {
 
-  constructor( private  http: HttpClient) { }
+  constructor( private  http: HttpClient) {}
 
   getAdminData(id: number): Observable<User>{
     const headers = new HttpHeaders({
@@ -30,7 +30,20 @@ export class AdminService {
     });
     return this.http.post<Boolean>(Apiback.ENDPOINT + '/api/admin/update', null, {headers, withCredentials: true});
   }
-  checkPass(id: number, pass: string): Observable<boolean> {
+  getbuses():Observable<any[]>{
+    return this.http.post<any[]>(Apiback.ENDPOINT+'/api/admin/getbuses',null,{withCredentials:true});
+  }
+  updatebus(bus :any):Observable<boolean>{
+    const headers = new HttpHeaders({
+      'id': `${bus.id}`,
+      'model': `${bus.model}`,
+      'capacity': `${bus.capacity}`,
+      'plate': `${bus.plate}`,
+      'type': `${bus.type}`
+    })
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/admin/updatebus',null,{headers,withCredentials:true});
+  }
+  checkPass(id: number, pass: string): Observable<boolean>{
     const headers = new HttpHeaders({
       'id': `${id}`,
       'password': `${pass}`

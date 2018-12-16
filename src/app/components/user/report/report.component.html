@@ -1,6 +1,6 @@
-  <div class="card" style="margin-top:5%;">
+  <div class="card" style="margin-top:5%;" *ngFor="let item of items;let i=index">
       <div class="card-header text-center">
-          <h5>Detalles de compra #n</h5>
+          <h5>Detalles de compra #{{i}}</h5>
         </div>
         <div class="card-body">
             <div id="accordion">
@@ -14,13 +14,13 @@
                   </div>
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                      <h6>Dia</h6>01/01/2018
+                      <h6>Dia</h6>{{item.date}}}
                       <hr class="my-4">
-                      <h6>Hora</h6>20:00
+                      <h6>Hora</h6>{{item.schedule}}
                       <hr class="my-4">
-                      <h6>Origen</h6>Aguascalientes
+                      <h6>Origen</h6>{{item.origin}}}
                       <hr class="my-4">
-                      <h6>Destino</h6>Zacatecas
+                      <h6>Destino</h6>{{item.destination}}}
                     </div>
                   </div>
                 </div>
@@ -33,16 +33,14 @@
                     </h5>
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                        <h6>Numero de asiento</h6>10
+                    <div class="card-body" *ngFor="let pas of item.passengers[i]">
+                        <h6>Numero de asiento</h6>{{pas.seat}}
                         <hr class="my-4">
-                        <h6>Pasajero</h6>Victor Manuel Vidales Hernandez
+                        <h6>Pasajero</h6>{{pas.name}}
                         <hr class="my-4">
-                        <h6>Monto</h6>$350
+                        <h6>Monto</h6>{{pas.cost}}
                         <hr class="my-4">
-                        <h6>Descuento</h6>N/A
-                        <hr class="my-4">
-                        <h6>Tipo de boleto</h6>Normal
+                        <h6>Tipo de boleto</h6>{{pas.type}}
                     </div>
                   </div>
                 </div>

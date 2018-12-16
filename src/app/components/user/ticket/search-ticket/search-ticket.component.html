@@ -190,7 +190,7 @@
                                 <h6 class="lead" style="color:#fff;">Por persona:${{this.time["cost"]}} MXN</h6>
                                 <h6 class="lead" style="color:#fff;">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
                                 <h6 class="lead" style="color:#fff;">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
-                                <h6 class="lead" style="color:#fff;">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                                <h6 class="lead" style="color:#fff;">Total:${{this.time.cost*numboletos+(this.time.iva*this.time.cost*numboletos)-this.descuento}} MXN</h6>
         </div>
         <div class="form-row justify-content-around">
                 <button class="btn btn-info" (click)="regresar(1)">Regresar</button>
@@ -204,6 +204,12 @@
                         <span aria-hidden="true">&times;</span>
                 </button>
         </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="!pay_valid && showalert">
+                        <strong>Error al realizar la compra!</strong>{{this.message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
         <div class="progress" style="height: 40px; margin-bottom: 1%;">
                 <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Pago" aria-valuemin="0" aria-valuemax="100">Pago</div>
         </div>
@@ -242,7 +248,8 @@
                         <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Por persona:${{this.time["cost"]}} MXN</h6>
                         <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Subtotal:${{(this.time["cost"])*numboletos}} MXN</h6>
                         <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">IVA:${{(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
-                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Total:${{(this.time["cost"])*numboletos+(this.time["iva"])*(this.time["cost"])*numboletos}} MXN</h6>
+                        <h6 class="lead" style="color:#fff;">Descuento:${{this.descuento}} MXN</h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Total:${{this.pay_total}} MXN</h6>
                 </div>
         </div>
         <div class="form-row justify-content-around">
