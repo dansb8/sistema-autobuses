@@ -1,5 +1,3 @@
-
-
 <div class="card" style="margin-top:2%;">
     <div class="card-header bg-dark">
         <p class="lead text-center" style="color:#fff;">Reportes</p>
@@ -64,36 +62,60 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                   <div class="card-body">
-                    <div class="jumbotron bg-dark">
-                        <div>
-                            <div style="display: block">
-                              <canvas baseChart
-                                      [datasets]="barChartData"
-                                      [labels]="barChartLabels"
-                                      [options]="barChartOptions"
-                                      [legend]="barChartLegend"
-                                      [chartType]="barChartType"
-                                      (chartHover)="chartHovered($event)"
-                                      (chartClick)="chartClicked($event)"></canvas>
-                            </div>
-                            <button (click)="randomize()">Update</button>
+                    <div class="jumbotron bg-dark" style="margin-top:2%;">
+                      <p class="lead" style="color: #fff;">Ventas Mensuales</p>
+                      <hr class="my-4 bg-white" >
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div style="display: block; color: #fff;">
+                          <canvas baseChart width="500" height="300"
+                          [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                      </div>
+                      <div class="col-md-6" style="margin-bottom: 10px">
+                        <form >
+                            <p class="lead" style="color: #fff;">Selecciona el mes</p>
+                            <hr class="my-4 bg-white" >
+                            <div class="form-row">
+                              <select  name="month" [(ngModel)]="month" class="form-control">
+                                  <option value="01">Enero</option>
+                                  <option value="02">Febrero</option>
+                                  <option value="03">Marzo</option>
+                                  <option value="04">Abril</option>
+                                  <option value="05">Mayo</option>
+                                  <option value="06">Junio</option>
+                                  <option value="07">Julio</option>
+                                  <option value="08">Agosto</option>
+                                  <option value="09">Septiembre</option>
+                                  <option value="10">Octubre</option>
+                                  <option value="11">Noviembre</option>
+                                  <option value="12">Diciembre</option>
+                                </select>
                           </div>
+                          <hr class="my-4 bg-white" >
+                          <p class="lead" style="color: #fff;">Selecciona el año</p>
+                          <hr class="my-4 bg-white" >
+                          <div class="form-row">
+                            <select  name="yearMonth" [(ngModel)]="yearMonth" class="form-control">
+                              <option value=2018>2018</option>
+                              <option value=2017>2017</option>
+                            </select>
+                        </div>
+                          <hr class="my-4 bg-white" >
+                          <div class="form-row">
+                            <button (click)="getReportMonth()" class="btn btn-success">Generar reporte</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                      
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header bg-dark" id="headingThree">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Otro reporte
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                  <div class="card">
-                      Aqui va otro reporte
+                      
                   </div>
                 </div>
               </div>

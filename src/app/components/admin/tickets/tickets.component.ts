@@ -1,15 +1,24 @@
-import { Component} from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component, OnInit} from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
+import { TerminalService } from '../../../services/terminal.service';
+import { Terminal } from 'src/app/interfaces/terminal';
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent {
-  constructor(private adminService: AdminService) {
+export class TicketsComponent implements OnInit {
+  constructor(private adminService: AdminService, private terminalService: TerminalService) {
   }
+  public terminals: Terminal[];
+  public terminal: Terminal;
   public year: number;
+  public yearMonth: number;
+  public month: number;
+// variables para grafica de pay
+  public pieChartLabels: string[] = [];
+  public pieChartData: number[] = [];
+  public pieChartType = 'pie';
 // Variables para grafica
 public lineChartData: Array<any> = [
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Descuento'},
@@ -70,17 +79,15 @@ public barChartOptions: any = {
   scaleShowVerticalLines: false,
   responsive: true
 };
-public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+public barChartLabels = [] ;
 public barChartType = 'bar';
 public barChartLegend = true;
 public barChartData: any[] = [
-  {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+  {data: [], label: 'Ventas Totales'},
 ];
 public getReport(): void {
   this.adminService.getReport(this.year).subscribe((aux: Array<any>) => {
     let k = 0;
-    console.log(aux[0].discount);
       for (let j = 0; j < this.aux[0].data.length; j++) {
         if (aux[k].month === j + 1) {
           this.aux[0].data[j] = aux[k].discount;
@@ -95,10 +102,16 @@ public getReport(): void {
           this.aux[3].data[j] = 0;
         }
       }
-    this.modificarValores();
+    this.getValues();
   });
 }
-public modificarValores(): void {
+public getReportMonth(): void {
+  this.adminService.getReportMonth(this.yearMonth, this.month).subscribe((array: Array<any>) => {
+    console.log(array);
+    this.printDays(array);
+  });
+}
+public getValues(): void {
   const _lineChartData: Array<any> = new Array(this.lineChartData.length);
   for (let i = 0; i < this.lineChartData.length; i++) {
     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -108,21 +121,38 @@ public modificarValores(): void {
   }
   this.lineChartData = _lineChartData;
 }
+public printDays(array: Array<any>): void {
+  const aux = [];
+  const data = [];
+  let k = 0;
+  console.log(array[0].result2.length);
+  for (let i = 0; i < array[0].days; i ++) {
+    if ( array[0].result2.length > k && array[0].result2[k].day === i + 1) {
 
-// GRAFICA DE BARRAS
-public randomize(): void {
-const data = [
-  Math.round(Math.random() * 100), 59, 80, (Math.random() * 100), 56, (Math.random() * 100), 40];
-  const clone = JSON.parse(JSON.stringify(this.barChartData));
-  clone[0].data = data;
-  this.barChartData = clone;
+      data[i] = array[0].result2[k].total;
+      k++;
+    } else {
+      data[i] = 0;
+    }
+    aux[i] = i + 1;
+  }
+  this.barChartData[0].data = data;
+  this.barChartLabels = aux;
 }
+
+
 // eventos
 public chartClicked(e: any): void {
   console.log(e);
 }
-
 public chartHovered(e: any): void {
   console.log(e);
+}
+ngOnInit() {
+  this.pieChartLabels = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'];
+  this.pieChartData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  this.terminalService.getorigins().subscribe((terminals: Terminal[]) => {
+    this.terminals = terminals;
+  });
 }
 }

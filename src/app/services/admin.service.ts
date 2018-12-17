@@ -55,6 +55,18 @@ export class AdminService {
       'year': `${year}`
     });
     return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/year', null, {headers, withCredentials: true});
-
+}
+  getReportMonth(year: number, month: number): Observable<Array<any>> {
+    const headers = new HttpHeaders({
+      'year': `${year}`,
+      'month': `${month}`
+    });
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/yearMonth', null, {headers, withCredentials: true});
+  }
+  getReportTerminal(id: number): Observable<Array<any>> {
+    const headers = new HttpHeaders({
+      'id': `${id}`
+    });
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/terminal', null, {headers, withCredentials: true});
   }
 }
