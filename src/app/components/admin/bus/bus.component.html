@@ -21,8 +21,8 @@
             <input 
             type="text"
             class="form-control col-md-4"
-            name="capacity"
-            [(ngModel)]="capacity"
+            name="buses[i].capacity"
+            [(ngModel)]="buses[i].capacity"
             [disabled]="!this.capacity_edit[i]"
             [placeholder]="bus.capacity">
             <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.capacity_edit[i] = !this.capacity_edit[i];this.update_change[i]=true">Editar</button>
@@ -32,8 +32,8 @@
             <input 
             type="text"
             class="form-control col-md-4"
-            name="plate"
-            [(ngModel)]="plate"
+            name="buses[i].plate"
+            [(ngModel)]="buses[i].plate"
             [disabled]="!this.plate_edit[i]" 
             [placeholder]="bus.plate">
             <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.plate_edit[i] = !this.plate_edit[i];this.update_change[i]=true">Editar</button>
@@ -43,14 +43,15 @@
             <input 
             type="text"
             class="form-control col-md-4"
-            name="type"
-            [(ngModel)]="type"
+            name="buses[i].type"
+            [(ngModel)]="buses[i].type"
             [disabled]="!this.type_edit[i]" 
             [placeholder]="bus.type">
             <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.type_edit[i] = !this.type_edit[i];this.update_change[i]=true">Editar</button>
         </div>     
         <button class=" btn btn-outline-info col-md-4" (click)="updatebus(bus)" *ngIf="update_change[i]">Actualizar Datos</button>
-        <button class=" btn btn-outline-warning col-md-4" (click)="deletebus(bus)">Eliminar</button>   
+        <button class=" btn btn-danger col-md-4" (click)="deletebus(bus)">Eliminar</button>   
+
       </form>  
         
 </div>
