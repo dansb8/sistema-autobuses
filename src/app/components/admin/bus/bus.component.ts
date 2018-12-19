@@ -20,13 +20,25 @@ capacity_edit:boolean[];
 plate_edit:boolean[];
 type_edit:boolean[];
 update_change: boolean[];
-
+newbus: Bus;
+addbustoggle :boolean;
   constructor(private authService: AuthService, private adminService: AdminService){
     this.capacity_edit=[false]
     this.model_edit=[false]
     this.plate_edit=[false]
     this.type_edit=[false]
     this.update_change=[false]
+    this.newbus={
+      id:0,
+      model:"",
+      plate: "",
+      capacity: 0,
+      type: ""
+    }
+    this.addbustoggle=false
+  }
+  toggleadd(){
+    this.addbustoggle=!this.addbustoggle
   }
   getbuses(){
     this.adminService.getbuses().subscribe((buses : Bus[])=>{
@@ -39,6 +51,32 @@ update_change: boolean[];
         console.log("actualizado bus ",bus.id)
       }
     })
+  }
+  deletebus(bus :Bus){
+    this.adminService.deletebus(bus).subscribe((res : boolean)=>{
+      if(res){
+        console.log("bus eliminado ", bus.id)
+      }
+    })
+  }
+  addbus(){
+    if(this.authService.prueba){
+      if(this.newbus.model!="" && this.newbus.capacity>0 && this.newbus.plate!="" && this.newbus.type!="")
+      console.log("datos nuevos",this.newbus)
+      else
+      alert("Requiere todos los datos")
+      this.ngOnInit()
+    }
+    else{
+      if(this.newbus.model!="" && this.newbus.capacity>0 && this.newbus.plate!="" && this.newbus.type!=""){
+        this.adminService.addbus(this.newbus).subscribe((res : boolean)=>{
+          if(res){
+            console.log("Autobus añadido")
+            this.ngOnInit()
+          }
+        })
+      }
+    }
   }
   ngOnInit() {
     if(this.authService.prueba){

@@ -9,7 +9,7 @@ import { ticket } from 'src/app/interfaces/ticket';
 })
 export class ReportComponent implements OnInit {
 
-  Purchase: any [];
+  purchases: any [];
 
 
 
@@ -19,7 +19,7 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
     if(this.authService.prueba){
-      this.Purchase=[{
+      this.purchases=[{
         date:"12-05-18",
         schedule:"10:00",
         origin: "AGS",
@@ -34,6 +34,11 @@ export class ReportComponent implements OnInit {
         }
 
       }]
+    }
+    else{
+      this.userservice.getpurchases(this.authService.currentUser.id).subscribe((purchases : any[])=>{
+        this.purchases=purchases
+      })
     }
   }
 

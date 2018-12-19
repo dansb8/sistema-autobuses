@@ -25,7 +25,7 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: false
+        isAdmin: true
       };
       this.loggedin=true;
       console.log(this.isAdmin());

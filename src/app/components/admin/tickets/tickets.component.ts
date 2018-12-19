@@ -136,10 +136,10 @@ public getReportDay(): void {
   this.adminService.getReportDay().subscribe((array: Array<any>) => {
     console.log(array);
     const aux = [];
-    aux[0] = array.result2[0].student;
-    aux[1] = array.result2[0].discount;
-    aux[2] = array.result2[0].normal;
-    this.date = array.date;
+    //aux[0] = array.result2[0].student;
+    //aux[1] = array.result2[0].discount;
+    //aux[2] = array.result2[0].normal;
+    //this.date = array.date;
     this.pieChartData = aux;
   });
 }
@@ -189,16 +189,16 @@ public printData(array: Array<any>, flag: number): void {
   const aux = [];
   const data = [];
   let k = 0;
-  console.log(array.result2.length);
-  for (let i = 0; i < array.days; i ++) {
-    if ( array.result2.length > k && array.result2[k].day === i + 1) {
-      data[i] = array.result2[k].total;
-      k++;
-    } else {
-      data[i] = 0;
-    }
-    aux[i] = i + 1;
-  }
+  //console.log(array.result2.length);
+  //for (let i = 0; i < array.days; i ++) {
+    //if ( array.result2.length > k && array.result2[k].day === i + 1) {
+      //data[i] = array.result2[k].total;
+      //k++;
+    //} else {
+    //  data[i] = 0;
+    //}
+    //aux[i] = i + 1;
+  /*}
   if (flag === 1) {
     this.barChartData[0].data = data;
     this.barChartLabels = aux;
@@ -208,7 +208,7 @@ public printData(array: Array<any>, flag: number): void {
   } else if (flag === 3) {
     this.barChartData3[0].data = data;
     this.barChartLabels3 = aux;
-  } else {}
+  } else {}*/
 }
 public currentMonth(): void {
   const currentMonth = new Date().getMonth();
