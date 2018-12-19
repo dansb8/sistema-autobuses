@@ -1,18 +1,45 @@
 <div class="card" style="margin-top:2%;">
-    <div class="card-header bg-dark">
-        <p class="lead text-center" style="color:#fff;">Reportes</p>
+  <div class="card-header bg-dark">
+    <p class="lead text-center" style="color:#fff;">Reportes</p>
+  </div>
+  <div class="card-body">
+    <div id="accordion">
+      <div class="card">
+                  <div class="card-header bg-dark" id="headingTree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTree" aria-expanded="false" aria-controls="collapseTree">
+                        Ventas del dia
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTree" class="collapse" aria-labelledby="headingTree" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="jumbotron bg-dark" style="margin-top:2%;">
+                        <p class="lead" style="color: #fff;">Ventas del dia {{this.date}}</p>
+                        <hr class="my-4 bg-white" >
+                        <div style="display: block; color: #fff;">
+                          <div style="display: block">
+                            <canvas baseChart
+                                    [data]="pieChartData"
+                                    [labels]="pieChartLabels"
+                                    [chartType]="pieChartType"
+                                    (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></canvas>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
       </div>
-      <div class="card-body">
-          <div id="accordion">
-              <div class="card">
+      <div class="card">
                 <div class="card-header bg-dark" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       Reporte de ventas anuales
                     </button>
                   </h5>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
                       <div class="jumbotron bg-dark" style="margin-top:2%;">
                           <p class="lead" style="color: #fff;">Ventas Anuales</p>
@@ -51,8 +78,8 @@
                       </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
+      </div> 
+      <div class="card">
                 <div class="card-header bg-dark" id="headingTwo">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -118,7 +145,172 @@
                       
                   </div>
                 </div>
-              </div>
-            </div>
       </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingFour">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Ventas por terminal de origen a destinos
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Ventas de Terminal {{this.terminal.name}}</p>
+                <hr class="my-4 bg-white" >
+              <div class="row">
+                <div class="col-md-6">
+                  <div style="display: block; color: #fff;">
+                    <canvas baseChart width="500" height="300"
+                    [datasets]="barChartData2"
+                    [labels]="barChartLabels2"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 10px">
+                  <form >
+                      <p class="lead" style="color: #fff;">Selecciona la terminal</p>
+                      <hr class="my-4 bg-white" >
+                      <div class="form-row">
+                        <select class="form-control" required [(ngModel)]="terminal" name="terminal">
+                            <option [ngValue]="x" *ngFor="let x of terminals">
+                              {{x["name"]}},{{x["city"]}} {{x["state"]}}
+                            </option>
+                        </select>
+                    </div>
+                    <hr class="my-4 bg-white" >
+                    <p class="lead" style="color: #fff;">Selecciona el mes</p>
+                    <hr class="my-4 bg-white" >
+                    <div class="form-row">
+                        <select class="form-control" [(ngModel)]="month2" name="month2">
+                            <option [ngValue]="i" *ngFor="let i of months[0].name">
+                              {{i}}
+                            </option>
+                          </select>
+                    </div>
+                    <hr class="my-4 bg-white" >
+                    <div class="form-row">
+                      <button (click)="getReportTerminalD()" class="btn btn-success">Generar reporte</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingFive">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Ventas por terminal de destinos a origen
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Ventas de Terminal {{this.terminal2.name}}</p>
+                <hr class="my-4 bg-white" >
+              <div class="row">
+                <div class="col-md-6">
+                  <div style="display: block; color: #fff;">
+                    <canvas baseChart width="500" height="300"
+                    [datasets]="barChartData3"
+                    [labels]="barChartLabels3"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 10px">
+                  <form >
+                      <p class="lead" style="color: #fff;">Selecciona la terminal</p>
+                      <hr class="my-4 bg-white" >
+                      <div class="form-row">
+                        <select class="form-control" required [(ngModel)]="terminal2" name="terminal2">
+                            <option [ngValue]="x" *ngFor="let x of terminals">
+                              {{x["name"]}},{{x["city"]}} {{x["state"]}}
+                            </option>
+                        </select>
+                    </div>
+                    <hr class="my-4 bg-white" >
+                    <p class="lead" style="color: #fff;">Selecciona el mes</p>
+                    <hr class="my-4 bg-white" >
+                    <div class="form-row">
+                        <select class="form-control" [(ngModel)]="month3" name="month3">
+                            <option [ngValue]="i" *ngFor="let i of months[0].name">
+                              {{i}}
+                            </option>
+                          </select>
+                    </div>
+                    <hr class="my-4 bg-white" >
+                    <div class="form-row">
+                      <button (click)="getReportDestinysT()" class="btn btn-success">Generar reporte</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingSix">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                Las cinco rutas mas vendidas
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas mas vendidas</p>
+                <hr class="my-4 bg-white" >
+                  <div style="display: block; color: #fff;">
+                      <canvas baseChart
+                      [data]="doughnutChartData"
+                      [labels]="doughnutChartLabels"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingSeven">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                Las cinco rutas menos vendidas
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas menos vendidas</p>
+                <hr class="my-4 bg-white" >
+                  <div style="display: block; color: #fff;">
+                      <canvas baseChart
+                      [data]="doughnutChartData2"
+                      [labels]="doughnutChartLabels2"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

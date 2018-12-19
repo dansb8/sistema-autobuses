@@ -63,10 +63,27 @@ export class AdminService {
     });
     return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/yearMonth', null, {headers, withCredentials: true});
   }
-  getReportTerminal(id: number): Observable<Array<any>> {
+  getReportTerminal(id: number, month: number): Observable<Array<any>> {
     const headers = new HttpHeaders({
-      'id': `${id}`
+      'id': `${id}`,
+      'month': `${month}`
     });
     return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/terminal', null, {headers, withCredentials: true});
+  }
+  getReportDay(): Observable <Array<any>> {
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/dailySales', null, { withCredentials: true});
+  }
+  getReportTerminalD(id: number, month: number): Observable<Array<any>> {
+    const headers = new HttpHeaders({
+      'id': `${id}`,
+      'month': `${month}`
+    });
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/terminalD', null, {headers, withCredentials: true});
+  }
+  getReportRoutesMoreSold(): Observable <Array<any>> {
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/RoutesMoreSold', null, {withCredentials: true});
+  }
+  getReportRoutesLessSold(): Observable <Array<any>> {
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/RoutesLessSold', null, {withCredentials: true});
   }
 }
