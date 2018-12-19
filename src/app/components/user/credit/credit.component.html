@@ -1,12 +1,10 @@
-<div class="row">
-  <div id="area" *ngFor="let card of cards">
-    <div class="master-card col-md-12">
-      <div class="card">
+<div class="row bg-dark" style="margin-top:2%; border-radius: 10px; margin-bottom: 2%;">
+  <div id="area" class=" bg-dark" *ngFor="let card of cards; let i = index">
+    <div class="master-card ">
+      <div class="card" (click) = "this.editFlag[i] = !this.editFlag[i]">
         <div class="title">Tarjeta de {{card["type"]}}</div>
         <div class="input-number"><span class="title-number">Numeros de tarjeta</span>
           <div class="inputs-number">
-              <button class="btn btn-dark inputs-number" id="btn-options" (click)="delete(card['id'])">Eliminar</button>
-              <button class="btn btn-dark inputs-number" id="btn-options" (click)="toggledetails(card['id'])">Detalles</button>
               <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],0,4)" disabled/>
               <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],4,8)" disabled/>
               <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],8,12)" disabled/>
@@ -33,9 +31,8 @@
                 <div class="circle-3" *ngIf="card['company']=='Visa'"></div>
               </div>
             </div>
-            <div class="name"><span>{{card["owner"]}}</span></div>
         </div>
-        
+        <div class="name" style="margin-top:5px;"><span>{{card["owner"]}}</span></div>
       </div>
       <div class="card-back">
         <div class="tire"></div>
@@ -44,44 +41,29 @@
         </div>
         <div class="chip-card"></div>
       </div>
-      
+    </div> 
+    <div class="button-sent row" *ngIf="this.editFlag[i] == true">
+        <button class="btn btn-success col-md-12" style="margin-bottom: 3%;" (click)="toggledetails(card['id'])">Detalles</button>
+        <button class="btn btn-danger col-md-12"  (click)="delete(card['id'])">Eliminar</button>
     </div>
-    
   </div>
-  <div class="col-md-12 button-sent">
-      <button id="continue" class="btn btn-success col-md-3" [disabled]="!this.blockButton" (click)="this.blockButton=false">Atras</button>
-      <button id="back" class="btn btn-success col-md-3" style="margin-left:1%;" [disabled]="this.blockButton" (click)="this.blockButton=true">Adelante</button>
+  <div class="col button-sent">
+      <button id="continue" class="btn btn-success col-md-12" [disabled]="!this.blockButton" (click)="this.blockButton=false" style="margin-bottom:1%;">Atras</button>
+      <button id="back" class="btn btn-success col-md-12" [disabled]="this.blockButton" (click)="this.blockButton=true" style="margin-bottom:1%;">Adelante</button>
+      <button class="btn btn-info col-md-12" (click)="toggleNew()">Agregar Tarjeta</button>
   </div>
-  <!--<div class="card border-dark col-md-4" style="max-width:400px"  *ngFor="let card of cards">
-  <img class="card-img-top" src="/src/images/mastercard.jpg" *ngIf="card['company']=='MasterCard'" alt="Card image">
-  <img class="card-img-top" src="/src/images/visa.png" *ngIf="card['company']=='Visa'" alt="Card image">
-    <div class="card-body text-dark row">
-      <h4 class="card-title col-sm-12"> {{card["owner"]}} </h4>
-      <h6 class="card-text col-sm-12">{{card["number"]}} </h6>
-      <h6 class="card-text col-sm-4 text-muted text-center">Valida hasta</h6>
-      <p class="card-text col-sm-4 text-center">{{card["date"]}}</p>
-      <div class="col-md-12">
-        <button class="btn btn-dark col-md-6" (click)="delete(card['id'])">Eliminar</button>
-        <button class="btn btn-dark col-md-6" (click)="toggledetails(card['id'])">Detalles</button>
-      </div>
-    </div>
-  </div> -->
 </div>
-<div class="row">
-    <button class="btn btn-info col-sm-3 offset-md-8" (click)="toggleNew()">Agregar Tarjeta</button>
-</div>
-<div class="jumbotron" *ngIf="details">
-    <h5>Detalles de tarjeta</h5>
-  <div class="row" *ngFor="let item of report">
-    <label>Mensaje: </label>
-    <strong>{{item["message"]}}</strong>
-    <label>Fecha: </label>
-    <strong>{{item["date"]}}</strong>
-    <label>Hora: </label>
-    <strong>{{item["time"]}}</strong>
-    <hr class="my-4">
+<div class="jumbotron bg-dark" *ngIf="details">
+  <p class="lead" style="color: #fff;">Detalles de la tarjeta</p>
+  <hr class="my-4 bg-white" >
+  <div *ngFor="let item of report; let i = index">
+    <label style="color:#fff;">Mensaje: </label>
+    <strong style="color:#fff;">{{item["message"]}}</strong><br>
+    <label class="lead" style="color: #fff;">Fecha: </label>
+    <strong style="color: #fff;">{{item["date"]}}</strong><br>
+    <label class="lead" style="color: #fff;">Hora: </label>
+    <strong style="color: #fff;">{{item["time"]}}</strong>
+    <hr class="my-4 bg-white" >
   </div>
 </div>
 <app-edit-card *ngIf="addnew"></app-edit-card>
-<router-outlet></router-outlet>
-//AQUI ME QUEDE

@@ -9,7 +9,7 @@ declare var $: any; // para jquery
   styleUrls: ['./edit-card.component.css']
 })
 export class EditCardComponent implements OnInit {
-
+  public flagToggle =  true;
   name: string
   cardnum: string
   expmonth: number

@@ -24,18 +24,18 @@
                 </div>
         </div>
         <div class="form-row">
-                                <div class="col-md-6">
-                                        <div class="input-group mb-3">
-                                                        <div class="input-group-prepend">
-                                                                <span class="input-group-text">Origen</span>
-                                                        </div>
-                                                        <select class="form-control" required [(ngModel)]="origin" name="origin" (change)="checkDest()">
-                                                                <option [ngValue]="x" *ngFor="let x of terminals">
-                                                                        {{x["name"]}},{{x["city"]}} {{x["state"]}}
-                                                                </option>
-                                                        </select>
-                                        </div>
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Origen</span>
                                 </div>
+                                <select class="form-control" required [(ngModel)]="origin" name="origin" (change)="checkDest()">
+                                        <option [ngValue]="x" *ngFor="let x of terminals">
+                                                {{x["name"]}},{{x["city"]}} {{x["state"]}}
+                                        </option>
+                                </select>
+                        </div>
+                </div>
                                 <div class="col-md-6">
                                         <div class="input-group mb-3">
                                                 <div class="input-group-prepend">

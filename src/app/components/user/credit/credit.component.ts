@@ -17,6 +17,7 @@ export class CreditComponent implements OnInit {
   addnew: boolean;
   details: boolean;
   report: any[];
+  editFlag: boolean[] = [];
   constructor(private userservice: UserService, private authService: AuthService, private router: Router) {
     this.report = [{
       message:"mensaje 1",
@@ -40,8 +41,7 @@ export class CreditComponent implements OnInit {
               a("#area .master-card").css("transform", "rotateY(0deg)")
           }),a(".row #area #card").hover(function(b){
           })
-      })
-  }(jQuery);
+      })}(jQuery);
     this.addnew = false;
     if ( this.authService.prueba) {
       this.cards = [
@@ -49,7 +49,7 @@ export class CreditComponent implements OnInit {
         type: "Debito",
         company: "Visa",
         number: "1234567893029762",
-        owner: this.authService.currentUser.userName,
+        owner: 'Jesus Alonso Castro Lopez',
         date: "10/21"
         },
         {
@@ -57,7 +57,7 @@ export class CreditComponent implements OnInit {
           type: "Credito",
           company: "MasterCard",
           number: "8472918756430298",
-          owner: this.authService.currentUser.userName,
+          owner: 'Jesus Alonso Castro Lopez',
           date: "10/21"
         },
         {
@@ -65,46 +65,69 @@ export class CreditComponent implements OnInit {
           type: "Debito",
           company: "Visa",
           number: "1623748905748936",
-          owner: this.authService.currentUser.userName,
+          owner: 'Jesus Alonso Castro Lopez',
           date: "10/21"
         },
         {id: 4,
           type: "Debito",
           company: "Visa",
           number: "1234567893029762",
-          owner: this.authService.currentUser.userName,
+          owner: 'Jesus Alonso Castro Lopez',
           date: "10/21"
           },
           {id: 5,
             type: "Debito",
             company: "Visa",
             number: "1234567893029762",
-            owner: this.authService.currentUser.userName,
+            owner: 'Jesus Alonso Castro Lopez',
             date: "10/21"
             },
             {id: 6,
               type: "Debito",
               company: "Visa",
               number: "1234567893029762",
-              owner: this.authService.currentUser.userName,
+              owner: 'Jesus Alonso Castro Lopez',
               date: "10/21"
               },
               {id: 7,
                 type: "Debito",
                 company: "Visa",
                 number: "1234567893029762",
-                owner: this.authService.currentUser.userName,
+                owner: 'Jesus Alonso Castro Lopezasdasdadasasdasd',
                 date: "10/21"
-                }
+                },
+                {id: 8,
+                  type: "Debito",
+                  company: "Visa",
+                  number: "1234567893029762",
+                  owner: 'Jesus Alonso Castro Lopezasdasdadasasdasd',
+                  date: "10/21"
+                  },
+                  {id: 9,
+                    type: "Debito",
+                    company: "Visa",
+                    number: "1234567893029762",
+                    owner: 'Jesus Alonso Castro Lopezasdasdadasasdasd',
+                    date: "10/21"
+                    },
+                    {id: 10,
+                      type: "Debito",
+                      company: "Visa",
+                      number: "1234567893029762",
+                      owner: 'Jesus Alonso Castro Lopezasdasdadasasdasd',
+                      date: "10/21"
+                      }
       ];
     } else {
       this.id = this.authService.currentUser.id;
       this.userservice.showcards(this.id).subscribe((cards: Card[]) => {
-        this.cards=cards;
+        this.cards = cards;
         console.log(cards);
       });
     }
-    
+    for (let i = 0; i < this.cards.length; i++) {
+      this.editFlag[i] = false;
+    }
   }
   getNumbers(numbers: string , start: number, size: number): string {
     let aux = '';
@@ -113,12 +136,12 @@ export class CreditComponent implements OnInit {
       }
       return aux;
   }
- toggleNew(){
-   if(this.addnew){
-     this.addnew=false
+ toggleNew() {
+   if (this.addnew) {
+     this.addnew = false;
+   } else {
+   this.addnew = true;
    }
-   else
-   this.addnew=true
  }
   delete(id: number): void  {
     this.userservice.deletecard(id).subscribe((result: Boolean) => {
@@ -128,15 +151,16 @@ export class CreditComponent implements OnInit {
       }
       });
   }
-  toggledetails(id: number):void{
-    if(this.details)
-    this.details=false
-    else
-    this.details=true
-    if(!this.authService.prueba){
-      this.userservice.carddetails(id).subscribe((res: any)=>{
-        this.report=res;
-      })
+  toggledetails(id: number): void {
+    if (this.details) {
+    this.details = false;
+    } else {
+    this.details = true;
+    if (!this.authService.prueba) {
+      this.userservice.carddetails(id).subscribe((res: any) => {
+        this.report = res;
+      });
     }
   }
+}
 }
