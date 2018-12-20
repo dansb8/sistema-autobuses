@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService} from 'src/app/services/auth.service';
 import { ticket } from 'src/app/interfaces/ticket';
-@Component({  
+@Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.css']
@@ -10,11 +10,7 @@ import { ticket } from 'src/app/interfaces/ticket';
 export class ReportComponent implements OnInit {
 
   purchases: any [];
-
-
-
   constructor(private userservice: UserService,private authService: AuthService) {
-   
    }
 
   ngOnInit() {
@@ -28,17 +24,16 @@ export class ReportComponent implements OnInit {
           name:"Daniel Romo",
 
         }],
-        card:{
-          name: "Daniel Romo",
-          num:"XXXX-XXXX-XXXX-1234"
+        card: {
+          name: 'Daniel Romo',
+          num: 'XXXX-XXXX-XXXX-1234'
         }
 
-      }]
-    }
-    else{
-      this.userservice.getpurchases(this.authService.currentUser.id).subscribe((purchases : any[])=>{
-        this.purchases=purchases
-      })
+      }];
+    } else {
+      this.userservice.getpurchases(this.authService.currentUser.id).subscribe((purchases: any[]) => {
+        this.purchases = purchases;
+      });
     }
   }
 
