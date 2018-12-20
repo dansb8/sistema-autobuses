@@ -29,8 +29,11 @@
                routerLink='/user'>Bienvenido {{ userName }}</a>
           </li>
           <li *ngIf="!isLoggedIn">
-            <a class="nav-link"
-               routerLink='/login'>Ingresar</a>
+            <a class="nav-link" routerLink='/login'>Ingresar</a>
+          </li>
+          <li *ngIf="!isLoggedIn">
+              <a class="nav-link" routerLink='/register'>Registrarse</a>
+
           </li>
           <li  *ngIf="isLoggedIn">
             <a class="nav-link"
