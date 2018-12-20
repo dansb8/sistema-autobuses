@@ -1,3 +1,53 @@
-<p>
-  terminal works!
-</p>
+<div class="card-rows">  
+  <form class="jumbotron" *ngFor="let terminal of terminals;let i=index">
+      <h4 class="display-5">Terminal #{{terminal["id"]}}</h4>
+      <div class="form-row">
+          <p class="lead">Nombre</p>
+          <input
+                type="text"
+                class="form-control col-md-4"
+                name="terminal[i]"
+                [(ngModel)]="terminal[i].name"
+                [disabled]="!this.name_edit[i]" 
+                [placeholder]="terminal.name">
+                <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.name_edit[i] = !this.name_edit[i];this.update_change[i]=true">Editar</button>
+      </div>  
+      <div class="form-row">
+          <p class="lead">Ciudad</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="terminal[i].city"
+          [(ngModel)]="terminal[i].city"
+          [disabled]="!this.city_edit[i]"
+          >
+          <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.city_edit[i] = !this.city_edit[i];this.update_change[i]=true">Editar</button>
+      </div>
+      <div class="form-row">
+          <p class="lead">Estado</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="terminal[i].state"
+          [(ngModel)]="terminal[i].state"
+          [disabled]="!this.state_edit[i]" 
+          >
+          <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.state_edit[i] = !this.state_edit[i];this.update_change[i]=true">Editar</button>
+      </div>     
+      <div class="form-row">
+          <p class="lead">Direccion</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="terminal[i].address"
+          [(ngModel)]="terminal[i].address"
+          [disabled]="!this.address_edit[i]" 
+          >
+          <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.address_edit[i] = !this.address_edit[i];this.update_change[i]=true">Editar</button>
+      </div>     
+      <button class=" btn btn-outline-info col-md-4" (click)="updateterminal(terminal)" *ngIf="update_change[i]">Actualizar Datos</button>
+      <button class=" btn btn-danger col-md-4" (click)="deleteyterminal(bus)">Eliminar</button>   
+
+    </form>  
+      
+</div>

@@ -10,9 +10,6 @@ import { ticket } from 'src/app/interfaces/ticket';
 export class ReportComponent implements OnInit {
 
   purchases: any [];
-
-
-
   constructor(private userservice: UserService,private authService: AuthService) {
    
    }
@@ -26,7 +23,6 @@ export class ReportComponent implements OnInit {
         destination: "CAL",
         passengers: [{
           name:"Daniel Romo",
-
         }],
         card:{
           name: "Daniel Romo",
