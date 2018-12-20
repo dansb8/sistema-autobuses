@@ -19,6 +19,7 @@ import { SearchTicketComponent } from './components/user/ticket/search-ticket/se
 import { TicketsComponent } from './components/admin/tickets/tickets.component';
 import { PersonaldataComponent } from './components/admin/personaldata/personaldata.component';
 import { EditCardComponent } from './components/user/edit-card/edit-card.component';
+import { TerminalComponent } from './components/admin/terminal/terminal.component';
 const routes: Routes = [
   {path: '', component: ShellComponent, children: [
   { path: 'home', component: HomeComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
     children: [
       {path: 'bus', component: BusComponent},
       {path: 'tickets' , component: TicketsComponent},
+      {path: 'terminal', component: TerminalComponent},
       {path: 'personal' , component: PersonaldataComponent},
       {path: '' , redirectTo: 'personal', pathMatch: 'full'}
     ]

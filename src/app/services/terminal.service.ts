@@ -19,6 +19,9 @@ export class TerminalService {
     });
     return this.http.post<Terminal[]>(Apiback.ENDPOINT+'/api/terminal/directory/',null,{headers});
   }
+  terminals():Observable<any[]>{
+    return this.http.post<any []>(Apiback.ENDPOINT+'/api/terminal/showterminals/',null,{})
+  }
   gettotalterm():Observable<number>{
     return this.http.get<number>(Apiback.ENDPOINT+'/api/terminal/total');
   }
