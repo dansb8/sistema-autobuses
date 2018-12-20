@@ -1,7 +1,50 @@
-<div class="page-header">
+<div class="page-header row justify-content-between">
         <h1>Autobuses</h1>
-        
+        <button class="btn btn-outline-info col-md-4" (click)="toggleadd()">Agregar autobus</button>
 </div>
+<div class=" card-row">
+    <form class="jumbotron" *ngIf="this.addbustoggle">
+        <h4 class="display-5">Autobus nuevo</h4>
+        <div class="form-row">
+            <p class="lead">Modelo</p>
+            <input
+                  type="text"
+                  class="form-control col-md-4"
+                  name="newbus.model"
+                  [(ngModel)]="newbus.model"
+                  [placeholder]="modelo">
+                  
+        </div>  
+        <div class="form-row">
+            <p class="lead">Capacidad</p>
+            <input 
+            type="number"
+            class="form-control col-md-4"
+            name="newbus.capacity"
+            [(ngModel)]="newbus.capacity"
+            >
+        </div>
+        <div class="form-row">
+            <p class="lead">Matricula</p>
+            <input 
+            type="text"
+            class="form-control col-md-4"
+            name="newbus.plate"
+            [(ngModel)]="newbus.plate" 
+            [placeholder]="placa">
+            </div>     
+        <div class="form-row">
+            <p class="lead">Tipo</p>
+            <select name="newbus.type" id="type" [(ngModel)]="newbus.type" required>
+                <option value="austero">Austero</option>
+                <option value="De lujo">De lujo</option>
+            </select>
+        </div>
+        <div class="row justify-content-end">
+            <button class="btn btn-outline-info" (click)="addbus()">Agregar autobus</button>
+        </div>
+    </form>
+    </div>
 <div class="card-rows">  
     <form class="jumbotron" *ngFor="let bus of buses;let i=index">
         <h4 class="display-5">Autobus #{{bus["id"]}}</h4>

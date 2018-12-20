@@ -43,6 +43,21 @@ export class AdminService {
     })
     return this.http.post<boolean>(Apiback.ENDPOINT+'/api/admin/updatebus',null,{headers,withCredentials:true});
   }
+  deletebus(bus : any):Observable<boolean>{
+    const headers = new HttpHeaders({
+      'id': `${bus.id}`
+    })
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/admin/deletebus',null,{headers,withCredentials:true});
+  }
+  addbus(bus : any): Observable<boolean>{
+    const headers = new HttpHeaders({
+      'model': `${bus.model}`,
+      'capacity': `${bus.capacity}`,
+      'plate': `${bus.plate}`,
+      'type': `${bus.type}`
+    })
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/admin/addbus',null,{headers,withCredentials: true});
+  }
   checkPass(id: number, pass: string): Observable<boolean>{
     const headers = new HttpHeaders({
       'id': `${id}`,
