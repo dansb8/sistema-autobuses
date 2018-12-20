@@ -1,3 +1,88 @@
+<div class="row justify-content-end">
+  <button class="btn btn-outline-info col-md-4" (click)="toggleadd()">Agregar terminal</button>
+</div>
+
+<div class="card-row" *ngIf="addterminaltoggle">  
+  <form class="jumbotron">
+      <h4 class="display-5">Nueva Terminal</h4>
+      <div class="form-row">
+          <p class="lead">Nombre</p>
+          <input
+                type="text"
+                class="form-control col-md-4"
+                name="newterminal.name"
+                [(ngModel)]="newterminal.name"
+          >
+      </div>  
+      <div class="form-row">
+          <p class="lead">Ciudad</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="newterminal.city"
+          [(ngModel)]="newterminal.city"
+          >      
+      </div>
+      <div class="form-row">
+          <p class="lead">Estado</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="newterminal.state"
+          [(ngModel)]="newterminal.state" 
+          >
+          </div>     
+      <div class="form-row">
+          <p class="lead">Calle</p>
+          <input 
+          type="text"
+          class="form-control col-md-4"
+          name="newterminal.street"
+          [(ngModel)]="newterminal.street" 
+          >
+      </div>
+      <div class="form-row">
+        <p class="lead">Numero</p>
+        <input 
+        type="text"
+        class="form-control col-md-4"
+        name="newterminal.num"
+        [(ngModel)]="newterminal.num" 
+        >
+      </div>
+      <div class="form-row">
+        <p class="lead">Colonia</p>
+        <input 
+        type="text"
+        class="form-control col-md-4"
+        name="newterminal.col"
+        [(ngModel)]="newterminal.col" 
+        >
+      </div>
+      <div class="form-row">
+        <p class="lead">Telefono</p>
+        <input 
+        type="tel"
+        class="form-control col-md-4"
+        name="newterminal.tel"
+        [(ngModel)]="newterminal.tel" 
+        >
+      </div>
+      <div class="form-row">
+        <p class="lead">C.P.</p>
+        <input 
+        type="text"
+        class="form-control col-md-4"
+        name="newterminal.zip"
+        [(ngModel)]="newterminal.zip" 
+        >
+      </div>     
+      <div class="row justify-content-end">
+        <button class="btn btn-outline-info" (click)="addterminal()">Agregar terminal</button>
+      </div>
+    </form>  
+      
+</div>
 <div class="card-rows">  
   <form class="jumbotron" *ngFor="let terminal of terminals;let i=index">
       <h4 class="display-5">Terminal #{{terminal["id"]}}</h4>
@@ -6,10 +91,11 @@
           <input
                 type="text"
                 class="form-control col-md-4"
-                name="terminal[i]"
-                [(ngModel)]="terminal[i].name"
+                name="terminals[i].name"
+                [(ngModel)]="terminals[i].name"
                 [disabled]="!this.name_edit[i]" 
-                [placeholder]="terminal.name">
+                placeholder=""
+          >
                 <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.name_edit[i] = !this.name_edit[i];this.update_change[i]=true">Editar</button>
       </div>  
       <div class="form-row">
@@ -17,8 +103,8 @@
           <input 
           type="text"
           class="form-control col-md-4"
-          name="terminal[i].city"
-          [(ngModel)]="terminal[i].city"
+          name="terminals[i].city"
+          [(ngModel)]="terminals[i].city"
           [disabled]="!this.city_edit[i]"
           >
           <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.city_edit[i] = !this.city_edit[i];this.update_change[i]=true">Editar</button>
@@ -28,22 +114,44 @@
           <input 
           type="text"
           class="form-control col-md-4"
-          name="terminal[i].state"
-          [(ngModel)]="terminal[i].state"
+          name="terminals[i].state"
+          [(ngModel)]="terminals[i].state"
           [disabled]="!this.state_edit[i]" 
           >
           <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.state_edit[i] = !this.state_edit[i];this.update_change[i]=true">Editar</button>
       </div>     
       <div class="form-row">
-          <p class="lead">Direccion</p>
+          <p class="lead">Calle</p>
           <input 
           type="text"
           class="form-control col-md-4"
-          name="terminal[i].address"
-          [(ngModel)]="terminal[i].address"
-          [disabled]="!this.address_edit[i]" 
+          name="terminals[i].street"
+          [(ngModel)]="terminals[i].street"
+          [disabled]="!this.street_edit[i]" 
           >
-          <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.address_edit[i] = !this.address_edit[i];this.update_change[i]=true">Editar</button>
+          <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.street_edit[i] = !this.street_edit[i];this.update_change[i]=true">Editar</button>
+      </div>
+      <div class="form-row">
+        <p class="lead">Num</p>
+        <input 
+        type="text"
+        class="form-control col-md-4"
+        name="terminals[i].num"
+        [(ngModel)]="terminals[i].num"
+        [disabled]="!this.num_edit[i]" 
+        >
+        <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.num_edit[i] = !this.num_edit[i];this.update_change[i]=true">Editar</button>
+      </div>
+      <div class="form-row">
+        <p class="lead">Colonia</p>
+        <input 
+        type="text"
+        class="form-control col-md-4"
+        name="terminals[i].col"
+        [(ngModel)]="terminals[i].col"
+        [disabled]="!this.col_edit[i]" 
+        >
+        <button type="button" class="btn btn-outline-dark col-md-2" (click)="this.col_edit[i] = !this.col_edit[i];this.update_change[i]=true">Editar</button>
       </div>     
       <button class=" btn btn-outline-info col-md-4" (click)="updateterminal(terminal)" *ngIf="update_change[i]">Actualizar Datos</button>
       <button class=" btn btn-danger col-md-4" (click)="deleteyterminal(bus)">Eliminar</button>   
