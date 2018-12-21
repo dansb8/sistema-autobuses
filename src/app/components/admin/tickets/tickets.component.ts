@@ -2,7 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { TerminalService } from '../../../services/terminal.service';
 import { Terminal } from 'src/app/interfaces/terminal';
-
+import { RoutesReport } from 'src/app/interfaces/routes-report';
+import { Route } from '@angular/router';
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
@@ -21,6 +22,14 @@ public month: number;
 public month2: number;
 public month3: number;
 public months: Array<any> = [{id: [], name: []}];
+public ticketsQuantity: number;
+public ticketsQuantity2: number;
+public moneyQuantity: number;
+public moneyQuantity2: number;
+public routes: RoutesReport[];
+public routes2: RoutesReport[];
+public routes3: RoutesReport[];
+public routes4: RoutesReport[];
 // variables para grafica de pay
   public pieChartLabels: string[] = ['Estudiantes', 'Con Descuento', 'Normal'];
   public pieChartData: number[] = [];
@@ -128,29 +137,27 @@ public getReport(): void {
 }
 public getReportMonth(): void {
   this.adminService.getReportMonth(this.yearMonth, this.month).subscribe((array: Array<any>) => {
-    console.log(array);
-    this.printData(array, 1);
+    this.printData(array);
   });
 }
 public getReportDay(): void {
   this.adminService.getReportDay().subscribe((array: Array<any>) => {
-    console.log(array);
     const aux = [];
-    //aux[0] = array.result2[0].student;
-    //aux[1] = array.result2[0].discount;
-    //aux[2] = array.result2[0].normal;
-    //this.date = array.date;
+    aux[0] = array.result2[0].student;
+    aux[1] = array.result2[0].discount;
+    aux[2] = array.result2[0].normal;
+    this.date = array.date;
     this.pieChartData = aux;
   });
 }
 public getReportTerminalD(): void {
   this.adminService.getReportTerminal(this.terminal.id, this.month2).subscribe((array: Array<any>) => {
-    this.printData(array, 2);
+    this.printDataTerminals(array, 1);
   });
 }
 public getReportDestinysT(): void {
   this.adminService.getReportTerminalD(this.terminal2.id, this.month3).subscribe((array: Array<any>) => {
-    this.printData(array, 3);
+    this.printDataTerminals(array, 2);
   });
 }
 public getReportRoutesMS(): void {
@@ -161,6 +168,27 @@ public getReportRoutesMS(): void {
 public getReportRoutesLS(): void {
   this.adminService.getReportRoutesLessSold().subscribe((array: Array<any>) => {
     this.printDataDonut(array, 2);
+  });
+}
+public getReportTicketsQuantity(): void {
+  this.adminService.getReportQuantity(this.ticketsQuantity).subscribe((routes: RoutesReport[]) => {
+    this.routes = routes;
+  });
+}
+public getReportTicketsQuantity2(): void {
+  this.adminService.getReportQuantity2(this.ticketsQuantity2).subscribe((routes: RoutesReport[]) => {
+    this.routes2 = routes;
+  });
+}
+public getReportMoneyQuantity(): void {
+  console.log(this.moneyQuantity);
+  this.adminService.getReportMoneyQuantity(this.moneyQuantity).subscribe((routes: RoutesReport[]) => {
+    this.routes3 = routes;
+  });
+}
+public getReportMoneyQuantity2(): void {
+  this.adminService.getReportMoneyQuantity2(this.moneyQuantity2).subscribe((routes: RoutesReport[]) => {
+    this.routes4 = routes;
   });
 }
 // funciones auxiliares para reportes
@@ -174,41 +202,53 @@ public getValues(): void {
   }
   this.lineChartData = _lineChartData;
 }
+public printDataTerminals(array: Array<any>, flag: number): void {
+    let k = 0;
+    const data = [];
+    const aux = [];
+    for (let i = 0; i < array.terminals; i++) {
+      aux[i] = array.result[i].nombre;
+      if (array.result2.length > k && array.result[i].id === array.result2[k].id ) {
+        data[i] = array.result2[k].total;
+        k++;
+      } else {
+        data[i] = 0;
+      }
+    }
+    if (flag === 1) {
+      this.barChartData2[0].data = data;
+      this.barChartLabels2 = aux;
+    } else if (flag === 2) {
+      this.barChartData3[0].data = data;
+      this.barChartLabels3 = aux;
+    }
+}
 public printDataDonut(array: Array<any> , flag: number): void {
   for (let i = 0; i < array.length; i++) {
     if (flag === 1) {
-      this.doughnutChartLabels[i] = array[i].label;
-      this.doughnutChartData[i] = array[i].data;
+      this.doughnutChartLabels[i] = array[i].terminal;
+      this.doughnutChartData[i] = array[i].total;
     } else if (flag === 2) {
-      this.doughnutChartLabels[i] = array[i].label;
-      this.doughnutChartData[i] = array[i].data;
+      this.doughnutChartLabels2[i] = array[i].terminal;
+      this.doughnutChartData2[i] = array[i].total;
     }
   }
 }
-public printData(array: Array<any>, flag: number): void {
+public printData(array: Array<any>): void {
   const aux = [];
   const data = [];
   let k = 0;
-  //console.log(array.result2.length);
-  //for (let i = 0; i < array.days; i ++) {
-    //if ( array.result2.length > k && array.result2[k].day === i + 1) {
-      //data[i] = array.result2[k].total;
-      //k++;
-    //} else {
-    //  data[i] = 0;
-    //}
-    //aux[i] = i + 1;
-  /*}
-  if (flag === 1) {
+  for (let i = 0; i < array.days; i ++) {
+    if ( array.result2.length > k && array.result2[k].day === i + 1) {
+      data[i] = array.result2[k].total;
+      k++;
+    } else {
+      data[i] = 0;
+    }
+    aux[i] = i + 1;
+  }
     this.barChartData[0].data = data;
     this.barChartLabels = aux;
-  } else if (flag === 2) {
-    this.barChartData2[0].data = data;
-    this.barChartLabels2 = aux;
-  } else if (flag === 3) {
-    this.barChartData3[0].data = data;
-    this.barChartLabels3 = aux;
-  } else {}*/
 }
 public currentMonth(): void {
   const currentMonth = new Date().getMonth();
@@ -239,20 +279,14 @@ public chartHovered(e: any): void {
   console.log(e);
 }
 ngOnInit() {
-  // quitar desde aqui
-  const arrayaux: Array<any> = [
-    {label: 'Aguascalientes(540 Boletos)', data: 540000},
-    {label: 'Guadalajara(500 Boletos)', data: 500000},
-    {label: 'Zacatecas(450 Boletos)', data: 450000},
-    {label: 'Teocaltiche(400 Boletos)', data: 500000},
-    {label: 'Sinaloa(350 Boletos)', data: 350000}
-  ];
-  for (let q = 0; q < arrayaux.length; q++) {
-    this.doughnutChartData[q] = arrayaux[q].data;
-    this.doughnutChartLabels[q] = arrayaux[q].label; // hasta aqui
+  for (let q = 0; q < 5; q++) {
+    this.doughnutChartData[q] = 0;
+    this.doughnutChartLabels[q] = '';
+    this.doughnutChartData2[q] = 0;
+    this.doughnutChartLabels2[q] = '';
   }
-  // this.getReportRoutesMS();
-  // this.getReportRoutesLS();
+  this.getReportRoutesMS();
+  this.getReportRoutesLS();
   this.terminal = {
     id: 0,
     name: '',
@@ -279,5 +313,9 @@ ngOnInit() {
   this.terminalService.getorigins().subscribe((terminals: Terminal[]) => {
     this.terminals = terminals;
   });
+  this.ticketsQuantity = 0;
+  this.ticketsQuantity2 = 0;
+  this.moneyQuantity = 0;
+  this.moneyQuantity2 = 0;
 }
 }

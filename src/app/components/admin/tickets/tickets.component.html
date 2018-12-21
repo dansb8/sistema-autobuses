@@ -160,9 +160,9 @@
                 <p class="lead" style="color: #fff;">Ventas de Terminal {{this.terminal.name}}</p>
                 <hr class="my-4 bg-white" >
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-xl-12">
                   <div style="display: block; color: #fff;">
-                    <canvas baseChart width="500" height="300"
+                    <canvas baseChart 
                     [datasets]="barChartData2"
                     [labels]="barChartLabels2"
                     [options]="barChartOptions"
@@ -188,7 +188,7 @@
                     <hr class="my-4 bg-white" >
                     <div class="form-row">
                         <select class="form-control" [(ngModel)]="month2" name="month2">
-                            <option [ngValue]="i" *ngFor="let i of months[0].name">
+                            <option [ngValue]="x+1" *ngFor="let i of months[0].name; let x = index">
                               {{i}}
                             </option>
                           </select>
@@ -218,9 +218,9 @@
                 <p class="lead" style="color: #fff;">Ventas de Terminal {{this.terminal2.name}}</p>
                 <hr class="my-4 bg-white" >
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div style="display: block; color: #fff;">
-                    <canvas baseChart width="500" height="300"
+                    <canvas baseChart
                     [datasets]="barChartData3"
                     [labels]="barChartLabels3"
                     [options]="barChartOptions"
@@ -246,7 +246,7 @@
                     <hr class="my-4 bg-white" >
                     <div class="form-row">
                         <select class="form-control" [(ngModel)]="month3" name="month3">
-                            <option [ngValue]="i" *ngFor="let i of months[0].name">
+                            <option [ngValue]="x+1" *ngFor="let i of months[0].name;let x = index">
                               {{i}}
                             </option>
                           </select>
@@ -308,6 +308,160 @@
                       (chartHover)="chartHovered($event)"
                       (chartClick)="chartClicked($event)"></canvas>
                   </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingHeigth">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHeigth" aria-expanded="false" aria-controls="collapseHeigth">
+                Rutas que superen n cantidad de boletos
+              </button>
+            </h5>
+          </div>
+          <div id="collapseHeigth" class="collapse" aria-labelledby="headingHeigth" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas que superen {{this.ticketsQuantity}} cantidad de boletos</p>
+                <hr class="my-4 bg-white" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Cantidad</span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="ticketsQuantity" name="ticketsQuantity">
+                    {{this.quantity}}
+                    <button class="btn btn-success" (click) = "getReportTicketsQuantity()">Generar reporte</button>
+                    
+                </div>
+                <hr class="my-4 bg-white">
+                <div class="row" *ngFor="let route of routes">
+                  <div class="col-md-12" style="margin-bottom:1%;">
+                      <div class="card">
+                          <h5 class="card-header">{{route['terminal']}}</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Horario: {{route['horario']}}</h5>
+                            <h6 class="card-text">Boletos vendidos: {{route['boletos']}} </h6>
+                            <p class="card-text">Total de dinero: {{route['total']}}</p>
+                          </div>
+                        </div>
+                       
+                  </div>
+                   
+                </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingNine">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                Rutas que no superen n cantidad de boletos
+              </button>
+            </h5>
+          </div>
+          <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas que no superen {{this.ticketsQuantity2}} cantidad de boletos</p>
+                <hr class="my-4 bg-white" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Cantidad</span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="ticketsQuantity2" name="ticketsQuantity2">
+                    <button class="btn btn-success" (click) = "getReportTicketsQuantity2()">Generar reporte</button>
+                </div>
+                <hr class="my-4 bg-white">
+                <div class="row" *ngFor="let route of routes2">
+                  <div class="col-md-12" style="margin-bottom:1%;">
+                      <div class="card">
+                          <h5 class="card-header">{{route['terminal']}}</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Horario: {{route['horario']}}</h5>
+                            <h6 class="card-text">Boletos vendidos: {{route['boletos']}} </h6>
+                            <p class="card-text">Total de dinero: {{route['total']}}</p>
+                          </div>
+                        </div>
+                       
+                  </div>
+                   
+                </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingTen">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                Rutas que superen n cantidad de dinero
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas que superen {{this.moneyQuantity}} cantidad de dinero</p>
+                <hr class="my-4 bg-white" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Cantidad</span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="moneyQuantity" name="moneyQuantity">
+                    <button class="btn btn-success" (click) = "getReportMoneyQuantity()">Generar reporte</button>
+                </div>
+                <hr class="my-4 bg-white">
+                <div class="row" *ngFor="let route of routes3">
+                  <div class="col-md-12" style="margin-bottom:1%;">
+                      <div class="card">
+                          <h5 class="card-header">{{route['terminal']}}</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Horario: {{route['horario']}}</h5>
+                            <h6 class="card-text">Total de dinero: {{route['total']}}</h6>
+                            <p class="card-text">Boletos vendidos: {{route['boletos']}}</p>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header bg-dark" id="headingEleven">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                Rutas que no superen n cantidad de dinero
+              </button>
+            </h5>
+          </div>
+          <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+            <div class="card-body">
+              <div class="jumbotron bg-dark" style="margin-top:2%;">
+                <p class="lead" style="color: #fff;">Rutas que no superen {{this.moneyQuantity2}} cantidad de dinero</p>
+                <hr class="my-4 bg-white" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Cantidad</span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="moneyQuantity2" name="moneyQuantity2">
+                    <button class="btn btn-success" (click) = "getReportMoneyQuantity2()">Generar reporte</button>
+                </div>
+                <hr class="my-4 bg-white">
+                <div class="row" *ngFor="let route of routes4">
+                  <div class="col-md-12" style="margin-bottom:1%;">
+                      <div class="card">
+                          <h5 class="card-header">{{route['terminal']}}</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Horario: {{route['horario']}}</h5>
+                            <h6 class="card-text">Total de dinero: {{route['total']}}</h6>
+                            <p class="card-text">Boletos vendidos: {{route['boletos']}}</p>
+                          </div>
+                        </div>
+                  </div>
+                </div>
             </div>    
           </div>
         </div>

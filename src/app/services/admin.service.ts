@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../interfaces/user'
-import { Apiback } from 'src/app/apiback'
+import { User } from '../interfaces/user';
+import { Apiback } from 'src/app/apiback';
+import { RoutesReport } from 'src/app/interfaces/routes-report';
 @Injectable({
   providedIn: 'root'
 })
@@ -93,12 +94,38 @@ export class AdminService {
       'id': `${id}`,
       'month': `${month}`
     });
-    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/terminalD', null, {headers, withCredentials: true});
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/terminal2', null, {headers, withCredentials: true});
   }
   getReportRoutesMoreSold(): Observable <Array<any>> {
-    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/RoutesMoreSold', null, {withCredentials: true});
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/masVendidas', null, {withCredentials: true});
   }
   getReportRoutesLessSold(): Observable <Array<any>> {
-    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/RoutesLessSold', null, {withCredentials: true});
+    return this.http.post<Array<any>>(Apiback.ENDPOINT + '/api/admin/report/menosVendidas', null, {withCredentials: true});
+  }
+  getReportQuantity(tickets: number): Observable <RoutesReport[]> {
+    const headers = new HttpHeaders({
+      'boletos': `${tickets}`,
+    });
+    return this.http.post<RoutesReport[]>(Apiback.ENDPOINT + '/api/admin/report/mayorIgualBoletos', null, {headers, withCredentials: true});
+  }
+  getReportQuantity2(tickets: number): Observable <RoutesReport[]> {
+    const headers = new HttpHeaders({
+      'boletos': `${tickets}`,
+    });
+    return this.http.post<RoutesReport[]>(Apiback.ENDPOINT + '/api/admin/report/menorIgualBoletos', null, {headers, withCredentials: true});
+  }
+  getReportMoneyQuantity(money: number): Observable <RoutesReport[]> {
+    const headers = new HttpHeaders({
+      'cantidad': `${money}`,
+    });
+    return this.http.post<RoutesReport[]>(Apiback.ENDPOINT + '/api/admin/report/mayorIgualCantidad'
+    , null, {headers, withCredentials: true});
+  }
+  getReportMoneyQuantity2(money: number): Observable <RoutesReport[]> {
+    const headers = new HttpHeaders({
+      'cantidad': `${money}`,
+    });
+    return this.http.post<RoutesReport[]>(Apiback.ENDPOINT + '/api/admin/report/menorIgualCantidad'
+    , null, {headers, withCredentials: true});
   }
 }
