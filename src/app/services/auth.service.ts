@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵbypassSanitizationTrustStyle } from '@angular/core';
 import { User } from '../components/login/user';
 import { Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -11,7 +11,7 @@ export class AuthService {
   currentUser: User | null;
   loggedin = false;
   redirectUrl: string;
-  prueba: boolean=false;
+  prueba: boolean=true;
   constructor(private _http: HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
