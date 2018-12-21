@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService} from 'src/app/services/auth.service';
 import { ticket } from 'src/app/interfaces/ticket';
-import * as jsPDF from 'jspdf'; 
+
 
 @Component({
   selector: 'app-report',
@@ -36,11 +36,4 @@ export class ReportComponent implements OnInit {
       });
     }
   }
-  downloadPDF()
-  {
-    const doc= new jsPDF();
-    doc.text('Some text here', 10, 10)
-    doc.save('Test.pdf')
-  }
-
 }

@@ -140,7 +140,7 @@ export class TicketsComponent implements OnInit {
     });
   }
   public getReportDay(): void {
-  this.adminService.getReportDay().subscribe((array: Array<any>) => {
+  this.adminService.getReportDay().subscribe((array: any) => {
     const aux = [];
     aux[0] = array.result2[0].student;
     aux[1] = array.result2[0].discount;
@@ -201,7 +201,7 @@ export class TicketsComponent implements OnInit {
   }
   this.lineChartData = _lineChartData;
   }
-  public printDataTerminals(array: Array<any>, flag: number): void {
+  public printDataTerminals(array: any, flag: number): void {
     let k = 0;
     const data = [];
     const aux = [];
@@ -233,13 +233,18 @@ export class TicketsComponent implements OnInit {
     }
   }
   }
-  public printData(array: Array<any>): void {
+  public printData(array: any): void {
   const aux = [];
   const data = [];
   let k = 0;
-  for (let i = 0; i < array.days; i ++) {
-    if ( array.result2.length > k && array.result2[k].day === i + 1) {
-      data[i] = array.result2[k].total;
+  let arrayany: {
+    days: number;
+    result2: {day: number, total: number}[];
+  };
+  arrayany = array;
+  for (let i = 0; i < arrayany.days; i ++) {
+    if ( arrayany.result2.length > k && arrayany.result2[k].day === i + 1) {
+      data[i] = arrayany.result2[k].total;
       k++;
     } else {
       data[i] = 0;

@@ -9,7 +9,7 @@ import { TerminalService } from 'src/app/services/terminal.service';
   styleUrls: ['./terminal.component.css']
 })
 export class TerminalComponent implements OnInit {
-  terminals:{
+  terminals: {
     id: number,
     name: string,
     city: string,
