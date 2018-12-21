@@ -10,15 +10,12 @@
                 <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
         </div>
         <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-9">
                         <p class="lead" style="color: #fff;">Selecciona la ruta deseada</p>
                         <hr class="my-4 bg-white">
                 </div>
-                <div class="col-md-1">
-                        <div  *ngIf="!searchform.valid">
-                                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                        </div>
-                        <div *ngIf="searchform.valid" class="row">
+                <div class="col-md-3">
+                        <div *ngIf="searchform.valid" >
                                 <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
                                         <div class="swal2-success-circular-line-left" ></div>
                                           <span class="swal2-success-line-tip"></span>
@@ -99,15 +96,12 @@
                 <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Boletos</div>
         </div>
         <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-9">
                                         <p class="lead" style="color: #fff;">Seleccione el numero de boletos, la compra se limita a cinco boletos</p>
                                         <hr class="my-4 bg-white" >
                                 </div>
-                                <div class="col-md-1">
-                                        <div *ngIf="!selectForm.valid">
-                                                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                                        </div>
-                                        <div *ngIf="selectForm.valid" class="row">
+                                <div class="col-md-3">
+                                        <div *ngIf="selectForm.valid">
                                                 <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
                                                         <div class="swal2-success-circular-line-left" ></div>
                                                           <span class="swal2-success-line-tip"></span>
@@ -222,15 +216,12 @@
                 <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Pago" aria-valuemin="0" aria-valuemax="100">Pago</div>
         </div>
         <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-9">
                         <p class="lead" style="color: #fff;">Seleccione una de las tarjetas registradas</p>
                         <hr class="my-4 bg-white" >
                 </div>
-                <div class="col-md-1">
-                        <div  *ngIf="!payForm.valid">
-                                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                        </div>
-                        <div *ngIf="payForm.valid" class="row">
+                <div class="col-md-3">
+                        <div *ngIf="payForm.valid">
                                 <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
                                         <div class="swal2-success-circular-line-left" ></div>
                                           <span class="swal2-success-line-tip"></span>

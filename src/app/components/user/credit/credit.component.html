@@ -1,14 +1,14 @@
-<div class="row bg-dark" style="margin-top:2%; border-radius: 10px; margin-bottom: 2%;">
-  <div id="area" class=" bg-dark" *ngFor="let card of cards; let i = index">
+<div class="row" style="margin-top:2%; border-radius: 10px; margin-bottom: 2%;">
+  <div id="area" class="col-md-3" *ngFor="let card of cards; let i = index">
     <div class="master-card ">
       <div class="card" (click) = "this.editFlag[i] = !this.editFlag[i]">
         <div class="title">Tarjeta de {{card["type"]}}</div>
         <div class="input-number"><span class="title-number">Numeros de tarjeta</span>
           <div class="inputs-number">
               <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],0,4)" disabled/>
-              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],4,8)" disabled/>
-              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],8,12)" disabled/>
-              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],12,16)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],5,9)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],10,14)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],15,19)" disabled/>
           </div>
           <div class="selects-date selecters">
             <div class="day-select"><span>Dia</span>
@@ -47,12 +47,19 @@
         <button class="btn btn-danger col-md-12"  (click)="delete(card['id'])">Eliminar</button>
     </div>
   </div>
-  <div class="col button-sent">
-      <button id="continue" class="btn btn-success col-md-12" [disabled]="!this.blockButton" (click)="this.blockButton=false" style="margin-bottom:1%;">Atras</button>
-      <button id="back" class="btn btn-success col-md-12" [disabled]="this.blockButton" (click)="this.blockButton=true" style="margin-bottom:1%;">Adelante</button>
-      <button class="btn btn-info col-md-12" (click)="toggleNew()">Agregar Tarjeta</button>
-  </div>
 </div>
+<div class="row">
+    <div class="col-md-3 button-sent">
+        <button id="continue" class="btn btn-success col-md-12" [disabled]="!this.blockButton" (click)="this.blockButton=false" style="margin-bottom:1%;">Atras</button>
+    </div>
+    <div class="col-md-3 button-sent">
+        <button id="back" class="btn btn-success col-md-12" [disabled]="this.blockButton" (click)="this.blockButton=true" style="margin-bottom:1%;">Adelante</button>
+    </div>
+    <div class="col-md-3 button-sent">
+        <button class="btn btn-info col-md-12" (click)="toggleNew()">Agregar Tarjeta</button>
+    </div>
+</div>
+
 <div class="jumbotron bg-dark" *ngIf="details">
   <p class="lead" style="color: #fff;">Detalles de la tarjeta</p>
   <hr class="my-4 bg-white" >
