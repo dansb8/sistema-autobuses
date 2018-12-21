@@ -484,3 +484,6 @@
   .chiller-theme .mCSB_scrollTools .mCSB_draggerRail {
       background-color: transparent;
   }
+  a:hover{
+    cursor: pointer;
+  }

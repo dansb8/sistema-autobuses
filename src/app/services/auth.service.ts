@@ -11,8 +11,8 @@ export class AuthService {
   currentUser: User | null;
   loggedin = false;
   redirectUrl: string;
-  prueba: boolean=true;
-  constructor(private _http:HttpClient, private router: Router) { }
+  prueba: boolean=false;
+  constructor(private _http: HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
     return this.loggedin;
