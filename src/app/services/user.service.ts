@@ -70,8 +70,8 @@ export class UserService {
   }
   getpurchases(id: number): Observable<any[]>{
     const headers = new HttpHeaders({
-      'id_user': `${id}`
+      'id': `${id}`
     });
-    return this.http.post<any[]>(Apiback.ENDPOINT+'/api/user/purchases/',null,{headers,withCredentials:true});
+    return this.http.post<any[]>(Apiback.ENDPOINT+'/api/bill/report/',null,{headers,withCredentials:true});
   }
 }

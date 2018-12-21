@@ -17,18 +17,16 @@ export class ReportComponent implements OnInit {
   ngOnInit() { 
     if(this.authService.prueba){
       this.purchases=[{
-        date:"12-05-18",
-        schedule:"10:00",
-        origin: "AGS",
-        destination: "CAL", 
-        passengers: [{
-          name:"Daniel Romo",
-        }],
-        card: {
-          name: 'Daniel Romo',
-          num: 'XXXX-XXXX-XXXX-1234'
-        }
-
+        id: 1,
+        folio:1,
+        total:300.50,
+        subtotal:255.50,
+        origen:"AGS",
+        destino:"CAL",
+        horario:"",
+        fecha:"2018-10-09",
+        titular:"Daniel Fermin Romo Lopez",
+        numero:"XXXX-XXXX-XXXX-1234"
       }];
     } else {
       this.userservice.getpurchases(this.authService.currentUser.id).subscribe((purchases: any[]) => {

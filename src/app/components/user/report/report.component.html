@@ -14,13 +14,13 @@
                   </div>
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                      <h6>Dia</h6>{{item.date}}
+                      <h6>Dia</h6>{{item.fecha}}
                       <hr class="my-4">
-                      <h6>Hora</h6>{{item.schedule}}
+                      <h6>Hora</h6>{{item.horario}}
                       <hr class="my-4">
-                      <h6>Origen</h6>{{item.origin}}
+                      <h6>Origen</h6>{{item.origen}}
                       <hr class="my-4">
-                      <h6>Destino</h6>{{item.destination}}
+                      <h6>Destino</h6>{{item.destino}}
                     </div>
                   </div>
                 </div>
@@ -28,19 +28,19 @@
                   <div class="card-header bg-dark" id="headingTwo">
                     <h5 class="mb-0">
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Detalles del pasajero
+                        Detalles de compra
                       </button>
                     </h5>
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body" *ngFor="let pas of item.passengers">
-                        <h6>Numero de asiento</h6>{{pas.seat}}
+                    <div class="card-body">
+                        <h6>Folio</h6>{{item.folio}}
                         <hr class="my-4">
-                        <h6>Pasajero</h6>{{pas.name}}
+                        <h6>Sub-Total</h6>{{item.subtotal}}
                         <hr class="my-4">
-                        <h6>Monto</h6>{{pas.cost}}
+                        <h6>Total</h6>{{item.total}}
                         <hr class="my-4">
-                        <h6>Tipo de boleto</h6>{{pas.type}}
+                        
                     </div>
                   </div>
                 </div>
@@ -56,12 +56,11 @@
                     <div class="card-body">
                         <div class="card border-dark" style="width:300px">
                               <div class="card-body text-dark row">
-                                <h4 class="card-title col-sm-12">{{item.card.name}} </h4>
-                                <h6 class="card-text col-sm-12">{{item.card.num}}</h6>
+                                <h4 class="card-title col-sm-12">{{item.titular}} </h4>
+                                <h6 class="card-text col-sm-12">{{item.numero}}</h6>
                               </div>
                         </div> 
                     </div>
-                    <button class="btn btn-outline-info" (click)="downloadPDF()">Descargar factura</button>
                   </div>
                 </div>
               </div>
