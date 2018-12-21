@@ -140,14 +140,18 @@ export class SearchTicketComponent implements OnInit {
       console.log(payresp)
       if(payresp.result){
         this.showalert=true
-        for(let i=0;i<this.numboletos;i++){
-          this.terminalservice.sendTicket(this.sel_seat[i],this.name_pas[i],this.authService.currentUser.id,this.tipo_pas[i],this.time,this.dia,this.time.cost,this.time.iva,this.cardpay.id).subscribe((aceptado: any)=>{
-            if(!aceptado.result){
-              alert("Error al asignar pasajero")
-            }
-            this.pay_charged+=aceptado.total;
-          });
-        }
+        this.terminalservice.createbill().subscribe((numbill: any)=>{
+          console.log(numbill)
+          for(let i=0;i<this.numboletos;i++){
+            this.terminalservice.sendTicket(this.sel_seat[i],this.name_pas[i],this.authService.currentUser.id,this.tipo_pas[i],this.time,this.dia,this.time.cost,this.time.iva,this.cardpay.id,numbill.id).subscribe((aceptado: any)=>{
+              if(aceptado.result){
+                alert("Error al asignar pasajero")
+              }
+              this.pay_charged+=aceptado.total;
+            });
+          }
+        })
+        
         this.router.navigate(['/user/cards']);
       }
       else{

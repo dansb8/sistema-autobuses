@@ -68,7 +68,7 @@ export class TerminalService {
     })
     return this.http.post<Payresp>(Apiback.ENDPOINT+'/api/terminal/payment/',null,{headers,withCredentials:true})
   }
-  sendTicket(asiento: number,nombre: any,id:number,tipo: string,schedule: Schedule,fecha: string,cost: number,iva: number,id_card: number):Observable<boolean>{
+  sendTicket(asiento: number,nombre: any,id:number,tipo: string,schedule: Schedule,fecha: string,cost: number,iva: number,id_card: number,numbill: number):Observable<boolean>{
     const headers=new HttpHeaders({
       'id_user': `${id}`,
       'seat': `${asiento}`,
@@ -80,9 +80,13 @@ export class TerminalService {
       'fecha': `${fecha}`,
       'cost': `${cost}`,
       'iva': `${iva}`,
-      'id_card': `${id_card}`
+      'id_card': `${id_card}`,
+      'numbill': `${numbill}`
     })
     return this.http.post<boolean>(Apiback.ENDPOINT+'/api/ticketinfo/',null,{headers,withCredentials:true})
+  }
+  createbill():Observable<number>{
+    return this.http.post<number>(Apiback.ENDPOINT+'/api/bill/new',null,{withCredentials:true})
   }
   text(id: number, charge:number, message: string):Observable<boolean>{
     const headers=new HttpHeaders({
