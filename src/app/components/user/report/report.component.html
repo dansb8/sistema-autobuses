@@ -1,11 +1,11 @@
   <div class="card" style="margin-top:5%;" *ngFor="let item of purchases;let i=index">
-      <div class="card-header text-center">
-          <h5>Detalles de compra #{{i+1}}</h5>
+      <div class="card-header text-center bg-dark">
+          <h5 class="lead" style="color:#fff;">Detalles de compra {{i+1}}</h5>
         </div>
         <div class="card-body">
             <div id="accordion">
                 <div class="card">
-                  <div class="card-header" id="headingOne">
+                  <div class="card-header bg-dark" id="headingOne">
                     <h5 class="mb-0">
                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Detalles del viaje
@@ -25,7 +25,7 @@
                   </div>
                 </div>
                 <div class="card">
-                  <div class="card-header" id="headingTwo">
+                  <div class="card-header bg-dark" id="headingTwo">
                     <h5 class="mb-0">
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Detalles del pasajero
@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div class="card">
-                  <div class="card-header" id="headingThree">
+                  <div class="card-header bg-dark" id="headingThree">
                     <h5 class="mb-0">
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Tarjeta de credito

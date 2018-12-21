@@ -1,4 +1,5 @@
-<form class="jumbotron bg-secondary" novalidate (ngSubmit)="search(searchform)" #searchform="ngForm" *ngIf="!search_valid">
+<app-navbar></app-navbar>
+<form class="jumbotron bg-dark" novalidate style="margin-top:2%;"(ngSubmit)="search(searchform)" #searchform="ngForm" *ngIf="!search_valid">
   <div class="progress" style="height: 40px; margin-bottom: 1%;">
           <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
   </div>
@@ -42,7 +43,7 @@
                           </button>
                   </div>
 </form>
-<div class="jumbotron bg-secondary" *ngIf="search_valid">
+<div class="jumbotron bg-dark" style="margin-top:2%;" *ngIf="search_valid">
   <div class="progress" style="height: 40px; margin-bottom: 1%;">
           <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Resultados" aria-valuemin="0" aria-valuemax="100">Resultados</div>
   </div>
@@ -75,3 +76,4 @@
       </button>
   </div>
 </div>
+<app-footer></app-footer>
