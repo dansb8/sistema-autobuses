@@ -22,7 +22,6 @@ export class ReportComponent implements OnInit {
         destination: "CAL",
         passengers: [{
           name:"Daniel Romo",
-
         }],
         card: {
           name: 'Daniel Romo',
