@@ -141,46 +141,42 @@
                         [disabled]="!this.name_edit[i]" 
                         placeholder="">
               </div>
-      </div>
-      <div class="col-md-4">
-          <button type="button" class="btn btn-outline-success" (click)="this.name_edit[i] = !this.name_edit[i];this.update_change[i]=true">Editar</button>
-      </div>
-    </div>  
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-outline-success" (click)="this.name_edit[i] = !this.name_edit[i];this.update_change[i]=true">Editar</button>
+          </div>
+        </div>  
       <div class="form-row">
-          <div class="col-md-6">
-              <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                              <span class="input-group-text">Ciudad</span>
-                      </div>
-                      <input 
-                        type="text"
-                        class="form-control"
-                        name="terminals[i].city"
-                        [(ngModel)]="terminals[i].city"
-                        [disabled]="!this.city_edit[i]">
-              </div>
-      </div>
-      <div class="col-md-4">
-          <button type="button" class="btn btn-outline-success" (click)="this.city_edit[i] = !this.city_edit[i];this.update_change[i]=true">Editar</button>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                          <span class="input-group-text">Ciudad</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="terminals[i].city"
+                    [(ngModel)]="terminals[i].city"
+                    [disabled]="!this.city_edit[i]" 
+                    placeholder="">
+          </div>
       </div>
       </div>
       <div class="form-row">
-          <div class="col-md-6">
-              <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                              <span class="input-group-text">Estado</span>
-                      </div>
-                      <input 
-                        type="text"
-                        class="form-control"
-                        name="terminals[i].state"
-                        [(ngModel)]="terminals[i].state"
-                        [disabled]="!this.state_edit[i]">
-              </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                          <span class="input-group-text">Estado</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="terminals[i].state"
+                    [(ngModel)]="terminals[i].state"
+                    [disabled]="!this.state_edit[i]" 
+                    placeholder="">
+          </div>
       </div>
-      <div class="col-md-4">
-          <button type="button" class="btn btn-outline-success" (click)="this.state_edit[i] = !this.state_edit[i];this.update_change[i]=true">Editar</button>
-        </div>
       </div>     
       <div class="form-row">
           <div class="col-md-6">

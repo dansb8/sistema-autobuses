@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Terminal } from 'src/app/interfaces/terminal';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { TerminalService } from 'src/app/services/terminal.service';
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.css']
 })
 export class TerminalComponent implements OnInit {
-  terminals: [{
+  terminals:{
     id: number,
     name: string,
     city: string,
@@ -18,7 +19,7 @@ export class TerminalComponent implements OnInit {
     col: string,
     tel: string,
     zip: string
-  }];
+  }[];
   newterminal: any;
   name_edit:  boolean[];
   city_edit: boolean[];
@@ -28,7 +29,7 @@ export class TerminalComponent implements OnInit {
   col_edit: boolean[];
   update_change: boolean[];
   addterminaltoggle: boolean;
-  constructor(private adminservice: AdminService, private authservice: AuthService) {
+  constructor(private adminservice: AdminService, private authservice: AuthService,private terminalService: TerminalService) {
     this.name_edit=[false]
     this.city_edit=[false]
     this.state_edit=[false]
@@ -60,6 +61,13 @@ export class TerminalComponent implements OnInit {
       alert("datos requeridos")
     }
   }
+  getterminal(){
+    if(!this.authservice.prueba){
+      this.terminalService.terminals().subscribe((terminals: any[])=>{
+        this.terminals=terminals;
+      })
+    }
+  }
   ngOnInit() {
     if(this.authservice.prueba){
       this.terminals=[{
@@ -73,6 +81,9 @@ export class TerminalComponent implements OnInit {
         tel: "9121212",
         zip: "20210"
       }]
+    }
+    else{
+      this.getterminal()
     }
   }
 

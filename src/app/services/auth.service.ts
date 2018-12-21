@@ -1,7 +1,7 @@
 import { Injectable, ɵbypassSanitizationTrustStyle } from '@angular/core';
 import { User } from '../components/login/user';
 import { Observable} from 'rxjs/Observable';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router} from '@angular/router';
 import { Apiback } from 'src/app/apiback';
 @Injectable({
@@ -25,7 +25,7 @@ export class AuthService {
       this.currentUser = {
         id: 2,
         userName: userName,
-        isAdmin: false
+        isAdmin: true
       };
       this.loggedin=true;
       console.log(this.isAdmin());
