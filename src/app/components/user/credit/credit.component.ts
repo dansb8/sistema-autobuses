@@ -124,9 +124,9 @@ export class CreditComponent implements OnInit {
         this.cards = cards;
         console.log(cards);
       });
-    }
-    for (let i = 0; i < this.cards.length; i++) {
-      this.editFlag[i] = false;
+      for (let i = 0; i < this.cards.length; i++) {
+        this.editFlag[i] = false;
+      }
     }
   }
   getNumbers(numbers: string , start: number, size: number): string {

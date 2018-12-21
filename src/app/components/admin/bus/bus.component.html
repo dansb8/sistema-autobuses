@@ -1,43 +1,69 @@
-<button class="btn btn-outline-success col-md-4" (click)="toggleadd()">Agregar autobus</button>
+<button class="btn btn-outline-success col-md-4"  style="margin-bottom: 1%;"(click)="toggleadd()">Agregar autobus</button>
 <div class=" card-row">
-    <form class="jumbotron" *ngIf="this.addbustoggle">
-        <h4 class="display-5">Autobus nuevo</h4>
+    <form class="jumbotron bg-dark" *ngIf="this.addbustoggle">
+        <h4 class="display-5" style="color:#fff;">Autobus Nuevo</h4>
+        <hr class="my-4 bg-white">
         <div class="form-row">
-            <p class="lead">Modelo</p>
-            <input
-                  type="text"
-                  class="form-control col-md-4"
-                  name="newbus.model"
-                  [(ngModel)]="newbus.model"
-                  [placeholder]="modelo">  
+                <div class="col-md-8">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Modelo</span>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="newbus.model"
+                                    [(ngModel)]="newbus.model"
+                                    [placeholder]="modelo">
+                        </div>
+                </div>
         </div>  
         <div class="form-row">
-            <p class="lead">Capacidad</p>
-            <input 
-            type="number"
-            class="form-control col-md-4"
-            name="newbus.capacity"
-            [(ngModel)]="newbus.capacity"
-            >
+                <div class="col-md-8">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Capacidad</span>
+                                </div>
+                                <input 
+                                    type="number"
+                                    class="form-control"
+                                    name="newbus.capacity"
+                                    [(ngModel)]="newbus.capacity">
+                        </div>
+                </div>
         </div>
         <div class="form-row">
-            <p class="lead">Matricula</p>
-            <input 
-            type="text"
-            class="form-control col-md-4"
-            name="newbus.plate"
-            [(ngModel)]="newbus.plate" 
-            [placeholder]="placa">
+                <div class="col-md-8">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Matricula</span>
+                                </div>
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    name="newbus.plate"
+                                    [(ngModel)]="newbus.plate" 
+                                    [placeholder]="placa">
+                        </div>
+                </div>
             </div>     
         <div class="form-row">
-            <p class="lead">Tipo</p>
-            <select name="newbus.type" id="type" [(ngModel)]="newbus.type" required>
-                <option value="austero">Austero</option>
-                <option value="De lujo">De lujo</option>
-            </select>
+                <div class="col-md-8">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo</span>
+                                </div>
+                            <select name="newbus.type" id="type" [(ngModel)]="newbus.type" class="form-control" required>
+                                <option value="austero">Austero</option>
+                                <option value="De lujo">De lujo</option>
+                            </select>
+                        </div>
+                </div>
         </div>
-        <div class="row justify-content-end">
-            <button class="btn btn-outline-info" (click)="addbus()">Agregar autobus</button>
+        <div class="form-row">
+            <div class="col-md-4">
+                    <button class="btn btn-outline-info" (click)="addbus()">Agregar autobus</button>
+            </div>
         </div>
     </form>
 </div>
@@ -123,10 +149,10 @@
         </div>     
         <div class="row">
             <div class="col-md-4">
-                <button class=" btn btn-success" (click)="updatebus(bus)" *ngIf="update_change[i]">Actualizar Datos</button>
+                <button class=" btn btn-danger" (click)="deletebus(bus)">Eliminar</button>  
             </div>
             <div class="col-md-4">
-                <button class=" btn btn-danger" (click)="deletebus(bus)">Eliminar</button>   
+                <button class=" btn btn-success" (click)="updatebus(bus)" *ngIf="update_change[i]">Actualizar Datos</button>
             </div>
         </div> 
 

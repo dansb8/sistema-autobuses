@@ -302,8 +302,8 @@ export class SearchTicketComponent implements OnInit {
       ]
     }
     else{
-      this.userservice.showcards(this.authService.currentUser.id).subscribe((cards: Card[])=>{
-        this.cards=cards;
+      this.userservice.showcards(this.authService.currentUser.id).subscribe((cards: Card[]) => {
+        this.cards = cards;
         console.log(cards);
       });
     }
@@ -355,7 +355,7 @@ export class SearchTicketComponent implements OnInit {
         }
         ban=true
       }
-      console.log(this.seatsAva) 
+      console.log(this.seatsAva);
     }
   }  
 }

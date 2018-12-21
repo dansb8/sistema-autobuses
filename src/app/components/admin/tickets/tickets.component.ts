@@ -11,49 +11,48 @@ import { Route } from '@angular/router';
 })
 export class TicketsComponent implements OnInit {
   constructor(private adminService: AdminService, private terminalService: TerminalService) {}
-
-public date: string;
-public terminals: Terminal[];
-public terminal: Terminal;
-public terminal2: Terminal;
-public year: number;
-public yearMonth: number;
-public month: number;
-public month2: number;
-public month3: number;
-public months: Array<any> = [{id: [], name: []}];
-public ticketsQuantity: number;
-public ticketsQuantity2: number;
-public moneyQuantity: number;
-public moneyQuantity2: number;
-public routes: RoutesReport[];
-public routes2: RoutesReport[];
-public routes3: RoutesReport[];
-public routes4: RoutesReport[];
+  public date: string;
+  public terminals: Terminal[];
+  public terminal: Terminal;
+  public terminal2: Terminal;
+  public year: number;
+  public yearMonth: number;
+  public month: number;
+  public month2: number;
+  public month3: number;
+  public months: Array<any> = [{id: [], name: []}];
+  public ticketsQuantity: number;
+  public ticketsQuantity2: number;
+  public moneyQuantity: number;
+  public moneyQuantity2: number;
+  public routes: RoutesReport[];
+  public routes2: RoutesReport[];
+  public routes3: RoutesReport[];
+  public routes4: RoutesReport[];
 // variables para grafica de pay
   public pieChartLabels: string[] = ['Estudiantes', 'Con Descuento', 'Normal'];
   public pieChartData: number[] = [];
   public pieChartType = 'pie';
 // Variables para grafica
-public lineChartData: Array<any> = [
+  public lineChartData: Array<any> = [
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Descuento'},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Estudiante'},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Normal'},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Acumulado'}
 ];
-public aux: Array<any> = [
+  public aux: Array<any> = [
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
   {data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
 ];
-public lineChartLabels: Array<any> = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+  public lineChartLabels: Array<any> = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
                                       'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
                                       'Noviembre', 'Diciembre'];
-public lineChartOptions: any = {
+  public lineChartOptions: any = {
   responsive: true
-};
-public lineChartColors: Array<any> = [
+  };
+  public lineChartColors: Array<any> = [
   { // grey
     backgroundColor: 'rgba(66,139,202,0.2)',
     borderColor: 'rgba(66,139,202,1)',
@@ -87,60 +86,60 @@ public lineChartColors: Array<any> = [
     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
   }
 ];
-public lineChartLegend = true;
-public lineChartType = 'line';
+  public lineChartLegend = true;
+  public lineChartType = 'line';
 // variables para grafica de barras
-public barChartOptions: any = {
-  scaleShowVerticalLines: false,
-  responsive: true
-};
-public barChartLabels = [] ;
-public barChartType = 'bar';
-public barChartLegend = true;
-public barChartData: any[] = [
-  {data: [], label: 'Ventas Totales'},
-];
-public barChartLabels2 = [] ;
-public barChartData2: any[] = [
-  {data: [], label: 'Ventas por Terminal'}
-];
-public barChartLabels3 = [] ;
-public barChartData3: any[] = [
-  {data: [], label: 'Ventas por Terminal'}
-];
+  public barChartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels = [] ;
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData: any[] = [
+    {data: [], label: 'Ventas Totales'},
+  ];
+  public barChartLabels2 = [] ;
+  public barChartData2: any[] = [
+    {data: [], label: 'Ventas por Terminal'}
+  ];
+  public barChartLabels3 = [] ;
+  public barChartData3: any[] = [
+    {data: [], label: 'Ventas por Terminal'}
+  ];
 // variables para la grafica de dona
-public doughnutChartLabels: string[] = [];
-public doughnutChartData: number[] = [];
-public doughnutChartLabels2: string[] = [];
-public doughnutChartData2: number[] = [];
-public doughnutChartType = 'doughnut';
+  public doughnutChartLabels: string[] = [];
+  public doughnutChartData: number[] = [];
+  public doughnutChartLabels2: string[] = [];
+  public doughnutChartData2: number[] = [];
+  public doughnutChartType = 'doughnut';
 // funciones para reportes
-public getReport(): void {
-  this.adminService.getReport(this.year).subscribe((aux: Array<any>) => {
-    let k = 0;
-      for (let j = 0; j < this.aux[0].data.length; j++) {
-        if (aux[k].month === j + 1) {
-          this.aux[0].data[j] = aux[k].discount;
-          this.aux[1].data[j] = aux[k].student;
-          this.aux[2].data[j] = aux[k].normal;
-          this.aux[3].data[j] = aux[k].total;
-          k++;
-        } else {
-          this.aux[0].data[j] = 0;
-          this.aux[1].data[j] = 0;
-          this.aux[2].data[j] = 0;
-          this.aux[3].data[j] = 0;
+  public getReport(): void {
+    this.adminService.getReport(this.year).subscribe((aux: Array<any>) => {
+      let k = 0;
+        for (let j = 0; j < this.aux[0].data.length; j++) {
+          if (aux[k].month === j + 1) {
+            this.aux[0].data[j] = aux[k].discount;
+            this.aux[1].data[j] = aux[k].student;
+            this.aux[2].data[j] = aux[k].normal;
+            this.aux[3].data[j] = aux[k].total;
+            k++;
+          } else {
+            this.aux[0].data[j] = 0;
+            this.aux[1].data[j] = 0;
+            this.aux[2].data[j] = 0;
+            this.aux[3].data[j] = 0;
+          }
         }
-      }
-    this.getValues();
-  });
-}
-public getReportMonth(): void {
-  this.adminService.getReportMonth(this.yearMonth, this.month).subscribe((array: Array<any>) => {
-    this.printData(array);
-  });
-}
-public getReportDay(): void {
+      this.getValues();
+    });
+  }
+  public getReportMonth(): void {
+    this.adminService.getReportMonth(this.yearMonth, this.month).subscribe((array: Array<any>) => {
+      this.printData(array);
+    });
+  }
+  public getReportDay(): void {
   this.adminService.getReportDay().subscribe((array: Array<any>) => {
     const aux = [];
     aux[0] = array.result2[0].student;
@@ -149,50 +148,50 @@ public getReportDay(): void {
     this.date = array.date;
     this.pieChartData = aux;
   });
-}
-public getReportTerminalD(): void {
+  }
+  public getReportTerminalD(): void {
   this.adminService.getReportTerminal(this.terminal.id, this.month2).subscribe((array: Array<any>) => {
     this.printDataTerminals(array, 1);
   });
-}
-public getReportDestinysT(): void {
+  }
+  public getReportDestinysT(): void {
   this.adminService.getReportTerminalD(this.terminal2.id, this.month3).subscribe((array: Array<any>) => {
     this.printDataTerminals(array, 2);
   });
-}
-public getReportRoutesMS(): void {
+  }
+  public getReportRoutesMS(): void {
   this.adminService.getReportRoutesMoreSold().subscribe((array: Array<any>) => {
     this.printDataDonut(array, 1);
   });
-}
-public getReportRoutesLS(): void {
+  }
+  public getReportRoutesLS(): void {
   this.adminService.getReportRoutesLessSold().subscribe((array: Array<any>) => {
     this.printDataDonut(array, 2);
   });
-}
-public getReportTicketsQuantity(): void {
+  }
+  public getReportTicketsQuantity(): void {
   this.adminService.getReportQuantity(this.ticketsQuantity).subscribe((routes: RoutesReport[]) => {
     this.routes = routes;
   });
-}
-public getReportTicketsQuantity2(): void {
+  }
+  public getReportTicketsQuantity2(): void {
   this.adminService.getReportQuantity2(this.ticketsQuantity2).subscribe((routes: RoutesReport[]) => {
     this.routes2 = routes;
   });
-}
-public getReportMoneyQuantity(): void {
+  }
+  public getReportMoneyQuantity(): void {
   console.log(this.moneyQuantity);
   this.adminService.getReportMoneyQuantity(this.moneyQuantity).subscribe((routes: RoutesReport[]) => {
     this.routes3 = routes;
   });
-}
-public getReportMoneyQuantity2(): void {
+  }
+  public getReportMoneyQuantity2(): void {
   this.adminService.getReportMoneyQuantity2(this.moneyQuantity2).subscribe((routes: RoutesReport[]) => {
     this.routes4 = routes;
   });
-}
+  }
 // funciones auxiliares para reportes
-public getValues(): void {
+  public getValues(): void {
   const _lineChartData: Array<any> = new Array(this.lineChartData.length);
   for (let i = 0; i < this.lineChartData.length; i++) {
     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -201,8 +200,8 @@ public getValues(): void {
     }
   }
   this.lineChartData = _lineChartData;
-}
-public printDataTerminals(array: Array<any>, flag: number): void {
+  }
+  public printDataTerminals(array: Array<any>, flag: number): void {
     let k = 0;
     const data = [];
     const aux = [];
@@ -222,8 +221,8 @@ public printDataTerminals(array: Array<any>, flag: number): void {
       this.barChartData3[0].data = data;
       this.barChartLabels3 = aux;
     }
-}
-public printDataDonut(array: Array<any> , flag: number): void {
+  }
+  public printDataDonut(array: Array<any> , flag: number): void {
   for (let i = 0; i < array.length; i++) {
     if (flag === 1) {
       this.doughnutChartLabels[i] = array[i].terminal;
@@ -233,8 +232,8 @@ public printDataDonut(array: Array<any> , flag: number): void {
       this.doughnutChartData2[i] = array[i].total;
     }
   }
-}
-public printData(array: Array<any>): void {
+  }
+  public printData(array: Array<any>): void {
   const aux = [];
   const data = [];
   let k = 0;
@@ -249,8 +248,8 @@ public printData(array: Array<any>): void {
   }
     this.barChartData[0].data = data;
     this.barChartLabels = aux;
-}
-public currentMonth(): void {
+  }
+  public currentMonth(): void {
   const currentMonth = new Date().getMonth();
   for (let j = 0; j < currentMonth + 1; j++) {
     this.months[0].id[j] = j;
@@ -270,24 +269,24 @@ public currentMonth(): void {
       default: break;
     }
   }
-}
+  }
 // eventos
-public chartClicked(e: any): void {
-  console.log(e);
-}
-public chartHovered(e: any): void {
-  console.log(e);
-}
-ngOnInit() {
-  for (let q = 0; q < 5; q++) {
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+  ngOnInit() {
+    for (let q = 0; q < 5; q++) {
     this.doughnutChartData[q] = 0;
     this.doughnutChartLabels[q] = '';
     this.doughnutChartData2[q] = 0;
     this.doughnutChartLabels2[q] = '';
-  }
-  this.getReportRoutesMS();
-  this.getReportRoutesLS();
-  this.terminal = {
+    }
+    this.getReportRoutesMS();
+    this.getReportRoutesLS();
+    this.terminal = {
     id: 0,
     name: '',
     city: '',
@@ -295,8 +294,8 @@ ngOnInit() {
     address: '',
     tel: '',
     zip: ''
-  };
-  this.terminal2 = {
+    };
+    this.terminal2 = {
     id: 0,
     name: '',
     city: '',
@@ -304,18 +303,19 @@ ngOnInit() {
     address: '',
     tel: '',
     zip: ''
-  };
-  this.currentMonth();
-  for (let i = 0; i < 3 ; i++) {
+    };
+    this.currentMonth();
+    for (let i = 0; i < 3 ; i++) {
     this.pieChartData[i] = 0;
+    }
+    this.getReportDay();
+    this.terminalService.getorigins().subscribe((terminals: Terminal[]) => {
+      this.terminals = terminals;
+    });
+    this.ticketsQuantity = 0;
+    this.ticketsQuantity2 = 0;
+    this.moneyQuantity = 0;
+    this.moneyQuantity2 = 0;
   }
-  this.getReportDay();
-  this.terminalService.getorigins().subscribe((terminals: Terminal[]) => {
-    this.terminals = terminals;
-  });
-  this.ticketsQuantity = 0;
-  this.ticketsQuantity2 = 0;
-  this.moneyQuantity = 0;
-  this.moneyQuantity2 = 0;
-}
+
 }
