@@ -22,6 +22,19 @@ export class TerminalService {
   terminals():Observable<any[]>{
     return this.http.post<any []>(Apiback.ENDPOINT+'/api/terminal/showterminals/',null,{})
   }
+  addterminal(terminal : any):Observable<boolean>{
+    const headers = new HttpHeaders({
+      'name': `${terminal.name}`,
+      'city': `${terminal.city}`,
+      'state': `${terminal.state}`,
+      'street': `${terminal.street}`,
+      'num': `${terminal.num}`,
+      'col': `${terminal.col}`,
+      'tel': `${terminal.tel}`,
+      'zip': `${terminal.zip}`,
+    });
+    return this.http.post<boolean>(Apiback.ENDPOINT+'/api/terminal/addterminal',null,{headers,withCredentials: true});
+  }
   gettotalterm():Observable<number>{
     return this.http.get<number>(Apiback.ENDPOINT+'/api/terminal/total');
   }
